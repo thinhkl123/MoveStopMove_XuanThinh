@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : GameUnit
 {
     public enum WeaponType
     {
@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private float force = 10f;
     [SerializeField] private float torqueMag = 5f;
-    [SerializeField] private float rotationSpeed = 90f;
 
     private Transform parent;
 
@@ -35,7 +34,7 @@ public class Weapon : MonoBehaviour
     {
         rb.AddForce(direction.normalized * force, ForceMode.Impulse);
         //rb.AddTorque(Vector3.up * torqueMag);
-        if (weaponType == WeaponType.Rotate)
+        if (weaponType == WeaponType.Rotate || weaponType == WeaponType.Bomerang)
         {
             rb.AddTorque(Vector3.up * torqueMag, ForceMode.Impulse);
         }
@@ -53,14 +52,20 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Circle"))
+        {
+            return;
+        }
+
         if (other.CompareTag("Character"))
         {
             if (!CompareParent(other.gameObject.transform))
             {
-                Character character = other.gameObject.GetComponent<Character>();
+                //Character character = other.gameObject.GetComponent<Character>();
+                Character character = Cache.GetCharacter(other);
                 character.OnDeath();
-                Destroy(this.gameObject);
             }
         }
+        Destroy(this.gameObject);
     }
 }

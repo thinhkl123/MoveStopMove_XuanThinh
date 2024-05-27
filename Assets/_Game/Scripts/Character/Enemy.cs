@@ -14,9 +14,10 @@ public class Enemy : Character
     }
 
     [SerializeField] private EnemyState state;
-
+    [SerializeField] private SkinnedMeshRenderer body;
     [SerializeField] private GameObject targetCircle;
     [SerializeField] private float timeIdle = 2f;
+    [SerializeField] private Target targetArrow;
 
     private float currentTimeIdle;
     private NavMeshAgent agent;
@@ -32,11 +33,12 @@ public class Enemy : Character
         OnInit();
     }
 
-    private void OnInit()
+    public override void OnInit()
     {
+        base.OnInit();
         ChangeToState(EnemyState.Idle);
         destination = transform.position;
-        canAttack = true;
+        agent.enabled = false;
         //agent.stoppingDistance = radius;
     }
 
@@ -97,7 +99,7 @@ public class Enemy : Character
             case EnemyState.Seek:
                 agent.enabled = true;
                 destination = transform.position;
-                if (GetRandomPoint(transform.position, out destination, 10f))
+                if (GetRandomPoint(transform.position, out destination, 20f))
                 {
                     //Debug.Log("Seek");
                     agent.SetDestination(destination);
@@ -144,5 +146,15 @@ public class Enemy : Character
         base.OnDeath();
         ChangeToState(EnemyState.Dead);
         HideTarget();
+    }
+
+    public void SeetBody(Material material)
+    {
+        body.material = material;
+    }
+
+    public void SetColorTarget(Color color)
+    {
+        targetArrow.targetColor = color;
     }
 }

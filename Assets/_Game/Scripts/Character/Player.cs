@@ -12,10 +12,20 @@ public class Player : Character
     private float vertical;
     private Vector3 movement;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void Start()
     {
-        canAttack = true;
-        rb = GetComponent<Rigidbody>();
+        OnInit();
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+        visual.rotation = Quaternion.identity;
     }
 
     private void Update()

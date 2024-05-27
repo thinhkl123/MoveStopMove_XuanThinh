@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerCircle : MonoBehaviour
 {
+    [SerializeField] private LayerMask enemyLayer;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
         {
-            Enemy enemy;
-            if (other.gameObject.TryGetComponent<Enemy>(out enemy))
+            if ((enemyLayer & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
+                Enemy enemy = Cache.GetEnemy(other);
                 enemy.ShowTarget();
             }
         }
@@ -20,10 +21,13 @@ public class PlayerCircle : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            Enemy enemy;
-            if (other.gameObject.TryGetComponent<Enemy>(out enemy))
+            if (other.CompareTag("Character"))
             {
-                enemy.HideTarget();
+                if ((enemyLayer & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
+                {
+                    Enemy enemy = Cache.GetEnemy(other);
+                    enemy.HideTarget();
+                }
             }
         }
     }

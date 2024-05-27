@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378a359364166e6458f8d81d715e57ba, type: 3}
+  m_Name: Candy_4
+  m_EditorClassIdentifier: 
+  id: 7
+  weaponName: SWIRLY POP
+  speedBuf: 0
+  rangeBuf: 10
+  price: 600
+  weapon: {fileID: 2295791298814633854, guid: 1bb9f5d866f72d14bb3b0cacb445fe06, type: 3}
+  weaponOnHand: {fileID: 8415060664061292519, guid: 778477adf8e3c1f4bb50e418f74f0233, type: 3}
+  icon: {fileID: 21300000, guid: 5a7af5be6b42eb940ac6d08116d0fe7e, type: 3}

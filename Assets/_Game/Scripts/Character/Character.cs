@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character : GameUnit
 {
     [SerializeField] protected Animator animator;
     [SerializeField] protected Transform visual;
@@ -31,6 +31,15 @@ public class Character : MonoBehaviour
     //Dead
     private bool isDead = false;
 
+
+    public virtual void OnInit()
+    {
+        canAttack = true;
+        isDead = false;
+        //visual.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
+        animator.SetFloat("Speed", 0);
+    }
 
     public bool CanAttack()
     {

@@ -23,7 +23,8 @@ public class Character : GameUnit
     //Attack 
     [SerializeField] private Weapon weaponPrefab;
     [SerializeField] private Transform launchPoint;
-    [SerializeField] private GameObject weaponHand;
+    [SerializeField] protected GameObject weaponHand;
+    protected Weapon weapon;
     private Collider[] colliders;
     public bool canAttack;
     private Transform target;
@@ -85,7 +86,7 @@ public class Character : GameUnit
 
     public void LaunchWeapon()
     {
-        Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
         if (weapon != null)
         {
             weapon.Launch(target.position - transform.position);

@@ -52,7 +52,7 @@ public class Weapon : GameUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Circle"))
+        if (other.CompareTag("Circle") || other.CompareTag("Weapon"))
         {
             return;
         }

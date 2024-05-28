@@ -10,8 +10,15 @@ public class CharCircle : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            character.ResetAttack();
-            Destroy(other.gameObject);  
+            Weapon weapon = Cache.GetWeapon(other);
+            if (weapon != null)
+            {
+                if (weapon.CompareParent(character.transform))
+                {
+                    character.ResetAttack();
+                    Destroy(other.gameObject);
+                }
+            }
         }
     }
 }

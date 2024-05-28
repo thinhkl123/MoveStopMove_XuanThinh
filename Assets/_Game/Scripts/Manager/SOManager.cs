@@ -21,6 +21,19 @@ public class SOManager : Singleton<SOManager>
 
     [SerializeField] private List<WeaponSO> weaponSOList;
 
+    public WeaponSO GetWeaponSO(int idx = -1)
+    {
+        if (idx == -1)
+        {
+            idx = Random.Range(0, weaponSOList.Count);
+            return weaponSOList[idx];
+        }
+        else
+        {
+            return weaponSOList[idx];
+        }
+    }
+
     public Weapon GetWeapon(int idx = -1)
     {
         if (idx == -1)

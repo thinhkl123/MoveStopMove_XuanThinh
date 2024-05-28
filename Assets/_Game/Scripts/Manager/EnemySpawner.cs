@@ -21,8 +21,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
         Enemy enemy = SimplePool.Spawn<Enemy>(enemyPrefab, spawnPosList[tempIdx].position, spawnPosList[tempIdx].rotation);
         enemy.OnInit();
         ColorSO colorSO = SOManager.Ins.GetColorSO();
-        enemy.SeetBody(colorSO.material);
-        enemy.SetColorTarget(colorSO.color);
+        enemy.ChangeBody(colorSO.material);
+        enemy.ChangeColorTarget(colorSO.color);
         amountHasSpawned++;
     }
 }

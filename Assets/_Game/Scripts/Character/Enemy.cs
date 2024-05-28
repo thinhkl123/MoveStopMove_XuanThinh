@@ -30,15 +30,17 @@ public class Enemy : Character
 
     private void Start()
     {
-        OnInit();
+        //OnInit();
     }
 
     public override void OnInit()
     {
         base.OnInit();
+        
         ChangeToState(EnemyState.Idle);
         destination = transform.position;
         agent.enabled = false;
+        ChangeWeapon();
         //agent.stoppingDistance = radius;
     }
 
@@ -110,14 +112,25 @@ public class Enemy : Character
                 Attack();
                 break;
             case EnemyState.Dead:
+                GameManager.Ins.UpdateAliveChar();
                 agent.enabled = false;
+                if (weapon != null)
+                {
+                    Destroy(weapon.gameObject);
+                }
+                Invoke(nameof(DeSpawn), 1f);
                 break;
         }
-        }
+    }
+
+    private void DeSpawn()
+    {
+        SimplePool.Despawn(this);
+    }
 
     private bool GetRandomPoint(Vector3 center, out Vector3 result, float range = 10.0f)
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 100; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             NavMeshHit hit;
@@ -148,13 +161,31 @@ public class Enemy : Character
         HideTarget();
     }
 
-    public void SeetBody(Material material)
+    public void ChangeBody(Material material)
     {
         body.material = material;
     }
 
-    public void SetColorTarget(Color color)
+    public void ChangeColorTarget(Color color)
     {
         targetArrow.targetColor = color;
+    }
+
+    private void ChangeWeapon()
+    {
+        WeaponSO weaponSO = SOManager.Ins.GetWeaponSO();
+
+        if (weaponHand != null)
+        {
+            Destroy(weaponHand.gameObject);
+        }
+
+        Vector3 localPos = weaponSO.weaponOnHand.transform.position;
+        Quaternion localRot = weaponSO.weaponOnHand.transform.rotation;
+
+        weaponHand = Instantiate(weaponSO.weaponOnHand, Vector3.zero, Quaternion.identity, rightHand);
+
+        weaponHand.transform.localPosition = localPos;
+        weaponHand.transform.localRotation = localRot;
     }
 }

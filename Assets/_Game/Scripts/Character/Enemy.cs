@@ -114,10 +114,13 @@ public class Enemy : Character
             case EnemyState.Dead:
                 GameManager.Ins.UpdateAliveChar();
                 agent.enabled = false;
+                /*
                 if (weapon != null)
                 {
-                    Destroy(weapon.gameObject);
+                    //Destroy(weapon.gameObject);
+                    weapon.DeSpawn();
                 }
+                */
                 Invoke(nameof(DeSpawn), 1f);
                 break;
         }
@@ -142,6 +145,12 @@ public class Enemy : Character
         }
         result = Vector3.zero;
         return false;
+    }
+
+    public override void ResetAttack()
+    {
+        base.ResetAttack();
+        ChangeToState(EnemyState.Seek);
     }
 
     public void ShowTarget()
@@ -187,5 +196,7 @@ public class Enemy : Character
 
         weaponHand.transform.localPosition = localPos;
         weaponHand.transform.localRotation = localRot;
+
+        weaponPrefab = weaponSO.weapon;
     }
 }

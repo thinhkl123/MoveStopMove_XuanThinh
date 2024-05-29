@@ -12,6 +12,11 @@ public class GamePlayUI : UICanvas
     private void Start()
     {
         GameManager.Ins.OnUpdateAlivechar += GameManager_OnUpdateAlivechar;
+
+        settingBtn.onClick.AddListener(() =>
+        {
+            UIManager.Ins.OpenUI<PauseUI>();
+        });
     }
 
     private void OnDestroy()

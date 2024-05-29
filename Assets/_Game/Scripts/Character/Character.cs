@@ -21,16 +21,15 @@ public class Character : GameUnit
     [SerializeField] protected SkinnedMeshRenderer pant;
 
     //Attack 
-    [SerializeField] private Weapon weaponPrefab;
+    [SerializeField] protected Weapon weaponPrefab;
     [SerializeField] private Transform launchPoint;
     [SerializeField] protected GameObject weaponHand;
-    protected Weapon weapon;
     private Collider[] colliders;
     public bool canAttack;
     private Transform target;
 
     //Dead
-    private bool isDead = false;
+    protected bool isDead = false;
 
 
     public virtual void OnInit()
@@ -59,43 +58,54 @@ public class Character : GameUnit
     {
         animator.SetTrigger("Attack");
 
-        float minDis = Vector3.Distance(transform.position, colliders[0].transform.position);
-        target = colliders[0].transform;
+        float minDis = Vector3.Distance(transform.position, colliders[0].gameObject.transform.position);
+        target = colliders[0].gameObject.transform;
 
         for (int i = 1; i < colliders.Length; i++)
         {
             //minDis = Mathf.Min(minDis, Vector3.Distance(transform.position, colliders[i].transform.position));
-            if (minDis > Vector3.Distance(transform.position, colliders[i].transform.position))
+            if (minDis > Vector3.Distance(transform.position, colliders[i].gameObject.transform.position))
             {
-                minDis = Vector3.Distance(transform.position, colliders[i].transform.position);
-                target = colliders[i].transform;
+                minDis = Vector3.Distance(transform.position, colliders[i].gameObject.transform.position);
+                target = colliders[i].gameObject.transform;
             }
         }
+
+        //target.transform.position = new Vector3(target.position.x, 0f, target.position.z);
+
+        //Debug.Log(target.transform.position);
 
         visual.forward = target.position - transform.position;
 
         canAttack = false;
-        //StartCoroutine(CoolDownAttackTime());
+        StartCoroutine(CoolDownAttackTime());
     }
 
     IEnumerator CoolDownAttackTime()
     {
         yield return new WaitForSeconds(2f);
-        canAttack = true;
+        if (!isDead)
+        {
+            ResetAttack();
+        }
     }
 
     public void LaunchWeapon()
     {
-        weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        //Weapon weapon = SimplePool.Spawn<Weapon>(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        Debug.Log(weapon);
         if (weapon != null)
         {
-            weapon.Launch(target.position - transform.position);
+            weapon.OnInit();
             weapon.SetParent(transform);
+            weapon.SetRange(radius);
+            weapon.Launch(target.position);
         }
         weaponHand.SetActive(false);
     }
 
-    public void ResetAttack()
+    public virtual void ResetAttack()
     {
         canAttack = true;
         weaponHand.SetActive(true);

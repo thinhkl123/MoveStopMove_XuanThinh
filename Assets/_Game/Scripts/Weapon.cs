@@ -17,6 +17,9 @@ public class Weapon : GameUnit
     [SerializeField] private float torqueMag = 5f;
 
     private Transform parent;
+    private bool isLaunch;
+    private Vector3 target;
+    private float range;
 
     private Rigidbody rb;
 
@@ -25,20 +28,48 @@ public class Weapon : GameUnit
         rb = GetComponent<Rigidbody>();
     }
 
+    public void OnInit()
+    {
+        isLaunch = false;
+    }
+
     private void Start()
     {
         //Destroy(this.gameObject, 5f);
     }
 
-    public void Launch(Vector3 direction)
+    private void Update()
     {
-        rb.AddForce(direction.normalized * force, ForceMode.Impulse);
+        if (isLaunch)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, force * Time.deltaTime);
+        }
+    }
+
+    public void Launch(Vector3 target)
+    {
+        SetTarget(target);
+        isLaunch = true;
+        //rb.AddForce(direction.normalized * force, ForceMode.Impulse);
         //rb.AddTorque(Vector3.up * torqueMag);
         if (weaponType == WeaponType.Rotate || weaponType == WeaponType.Bomerang)
         {
             rb.AddTorque(Vector3.up * torqueMag, ForceMode.Impulse);
         }
+        Destroy(gameObject, range / force);
+        //Invoke(nameof(DeSpawn), range / force);
     } 
+
+    public void SetRange(float value)
+    {
+        range = value;
+    }
+
+    private void SetTarget(Vector3 newTarget)
+    {
+        newTarget = new Vector3(newTarget.x, transform.position.y, newTarget.z);
+        target = newTarget;
+    }
 
     public void SetParent(Transform parent)
     {
@@ -48,6 +79,11 @@ public class Weapon : GameUnit
     public bool CompareParent(Transform other)
     {
         return other == parent;
+    }
+
+    public void DeSpawn()
+    {
+        SimplePool.Despawn(this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,5 +103,6 @@ public class Weapon : GameUnit
             }
         }
         Destroy(this.gameObject);
+        //DeSpawn();
     }
 }

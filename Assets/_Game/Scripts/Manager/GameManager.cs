@@ -7,6 +7,24 @@ public class GameManager : Singleton<GameManager>
 {
     public event EventHandler OnUpdateAlivechar;
 
+    public enum GameState
+    {
+        WaitToStart,
+        CountDownToStart,
+        Playing,
+        Pause,
+        GameOver,
+    }
+
+    public GameState state;
+
+    private float countDownToStartTime = 3f;
+
+    private void Awake()
+    {
+        state = GameState.WaitToStart;
+    }
+
     public int AliveChar
     {
         get
@@ -31,7 +49,6 @@ public class GameManager : Singleton<GameManager>
     private void OnInit()
     {
         aliveChar = LevelManager.Ins.LevelCharNum;
-        Debug.Log(aliveChar);
     }
 
     public void UpdateAliveChar()

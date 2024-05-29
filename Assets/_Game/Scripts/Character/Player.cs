@@ -30,6 +30,12 @@ public class Player : Character
 
     private void Update()
     {
+        if (isDead)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
 

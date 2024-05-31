@@ -12,6 +12,7 @@ public class Character : GameUnit
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Collider col;
 
+    //scale
     public float scale = 1f;
 
     //Skin
@@ -19,6 +20,7 @@ public class Character : GameUnit
     [SerializeField] protected Transform leftHand;
     [SerializeField] protected Transform hair;
     [SerializeField] protected SkinnedMeshRenderer pant;
+    [SerializeField] protected SkinnedMeshRenderer body;
 
     //Attack 
     [SerializeField] protected Weapon weaponPrefab;
@@ -31,14 +33,22 @@ public class Character : GameUnit
     //Dead
     protected bool isDead = false;
 
+    //Score
+    public int score;
+
+    //ScoreBarUI
+    [SerializeField] private ScoreBarUI scoreBarUI;
 
     public virtual void OnInit()
     {
+        scale = 1f;
         canAttack = true;
         isDead = false;
         //visual.rotation = Quaternion.identity;
         //transform.rotation = Quaternion.identity;
         animator.SetFloat("Speed", 0);
+        score = 0;
+        scoreBarUI.UpdateBar(score);
     }
 
     public bool CanAttack()
@@ -94,7 +104,7 @@ public class Character : GameUnit
     {
         Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
         //Weapon weapon = SimplePool.Spawn<Weapon>(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
-        Debug.Log(weapon);
+        //Debug.Log(weapon);
         if (weapon != null)
         {
             weapon.OnInit();
@@ -137,5 +147,31 @@ public class Character : GameUnit
         isDead = true;
         col.enabled = false;
         animator.SetTrigger("Dead");
+    }
+
+    public void ChangeBody(Material material)
+    {
+        body.material = material;
+    }
+
+    public void ChangeColorBar(Color color)
+    {
+        scoreBarUI.ChangeColorBar(color);
+    }
+
+    public void ChangeScore(int value)
+    {
+        //Debug.Log(value);
+        score += value;
+        int curScore = (int) (scale - 1) * 10 + 10;
+        scoreBarUI.UpdateBar(score);
+        if (score >= curScore)
+        {
+            scale += 0.1f;
+            if (scale <= 2f)
+            {
+                transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
     }
 }

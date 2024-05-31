@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class Indicator : MonoBehaviour
 {
     [SerializeField] private IndicatorType indicatorType;
+    [SerializeField] private Image score;
+    [SerializeField] private TextMeshProUGUI scoreText;
     private Image indicatorImage;
     private Text distanceText;
 
@@ -45,6 +48,7 @@ public class Indicator : MonoBehaviour
     public void SetImageColor(Color color)
     {
         indicatorImage.color = color;
+        score.color = color;
     }
 
     /// <summary>
@@ -63,6 +67,7 @@ public class Indicator : MonoBehaviour
     public void SetTextRotation(Quaternion rotation)
     {
         distanceText.rectTransform.rotation = rotation;
+        score.rectTransform.rotation = rotation;
     }
 
     /// <summary>
@@ -72,6 +77,11 @@ public class Indicator : MonoBehaviour
     public void Activate(bool value)
     {
         transform.gameObject.SetActive(value);
+    }
+
+    public void ChangeScoreText(int value)
+    {
+        scoreText.text = value.ToString();
     }
 }
 

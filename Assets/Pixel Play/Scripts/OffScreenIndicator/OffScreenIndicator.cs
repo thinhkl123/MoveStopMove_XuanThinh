@@ -45,6 +45,7 @@ public class OffScreenIndicator : MonoBehaviour
             Vector3 screenPosition = OffScreenIndicatorCore.GetScreenPosition(mainCamera, target.transform.position);
             bool isTargetVisible = OffScreenIndicatorCore.IsTargetVisible(screenPosition);
             float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(mainCamera.transform.position) : float.MinValue;// Gets the target distance from the camera.
+            int score = target.GetScore();
             Indicator indicator = null;
 
             if(target.NeedBoxIndicator && isTargetVisible)
@@ -65,6 +66,7 @@ public class OffScreenIndicator : MonoBehaviour
                 indicator.SetDistanceText(distanceFromCamera); //Set the distance text for the indicator.
                 indicator.transform.position = screenPosition; //Sets the position of the indicator on the screen.
                 indicator.SetTextRotation(Quaternion.identity); // Sets the rotation of the distance text of the indicator.
+                indicator.ChangeScoreText(score);
             }
         }
     }

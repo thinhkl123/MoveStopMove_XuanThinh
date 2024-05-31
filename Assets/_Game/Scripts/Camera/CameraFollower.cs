@@ -7,11 +7,14 @@ public class CameraFollower : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float smooth;
-    Vector3 distance;
+    
+    private Vector3 distance;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
         distance = target.position - transform.position;
+        player = target.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,9 @@ public class CameraFollower : MonoBehaviour
     {
         Vector3 currentPosition = transform.position;
 
-        Vector3 newPosiotion = target.position - distance;
+        Vector3 newDistance = new Vector3(distance.x * player.scale, distance.y * player.scale, distance.z * player.scale);
+
+        Vector3 newPosiotion = target.position - newDistance;
 
         transform.position = Vector3.Lerp(currentPosition, newPosiotion, smooth * Time.deltaTime);
     }

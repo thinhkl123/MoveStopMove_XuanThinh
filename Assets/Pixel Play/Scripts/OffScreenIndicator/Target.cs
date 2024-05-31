@@ -23,7 +23,8 @@ public class Target : MonoBehaviour
     /// A reference to the target's indicator, 
     /// its value is assigned at runtime by the offscreen indicator script.
     /// </summary>
-    [HideInInspector] public Indicator indicator;
+    //[HideInInspector] 
+    public Indicator indicator;
 
     /// <summary>
     /// Gets the color for the target indicator.
@@ -100,5 +101,26 @@ public class Target : MonoBehaviour
     {
         float distanceFromCamera = Vector3.Distance(cameraPosition, transform.position);
         return distanceFromCamera;
+    }
+
+    private int score;
+
+    public void SetScore(int value)
+    {
+        score = value;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void ChangeScoreText(int value)
+    {
+        Debug.Log(indicator);
+        if (indicator != null)
+        {
+            indicator.ChangeScoreText(value);
+        }
     }
 }

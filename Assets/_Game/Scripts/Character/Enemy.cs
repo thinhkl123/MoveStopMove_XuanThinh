@@ -14,10 +14,9 @@ public class Enemy : Character
     }
 
     [SerializeField] private EnemyState state;
-    [SerializeField] private SkinnedMeshRenderer body;
     [SerializeField] private GameObject targetCircle;
-    [SerializeField] private float timeIdle = 2f;
-    [SerializeField] private Target targetArrow;
+    [SerializeField] private float timeIdle;
+    public Target targetArrow;
 
     private float currentTimeIdle;
     private NavMeshAgent agent;
@@ -46,6 +45,11 @@ public class Enemy : Character
 
     private void Update()
     {
+        if (GameManager.Ins.state != GameManager.GameState.Playing)
+        {
+            return;
+        }
+
         switch (state)
         {
             case EnemyState.Idle:
@@ -97,6 +101,7 @@ public class Enemy : Character
             case EnemyState.Idle:
                 currentTimeIdle = 0;
                 animator.SetFloat("Speed", 0);
+                timeIdle = Random.Range(2, 5f);
                 break;
             case EnemyState.Seek:
                 agent.enabled = true;
@@ -168,11 +173,6 @@ public class Enemy : Character
         base.OnDeath();
         ChangeToState(EnemyState.Dead);
         HideTarget();
-    }
-
-    public void ChangeBody(Material material)
-    {
-        body.material = material;
     }
 
     public void ChangeColorTarget(Color color)

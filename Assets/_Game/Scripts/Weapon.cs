@@ -99,9 +99,15 @@ public class Weapon : GameUnit
             {
                 //Character character = other.gameObject.GetComponent<Character>();
                 Character character = Cache.GetCharacter(other);
+                parent.gameObject.GetComponent<Character>().ChangeScore((int) (character.score/10) + 1);
                 character.OnDeath();
             }
+            else
+            {
+                return;
+            }
         }
+        //Debug.Log(other + " " + other.gameObject.tag);
         Destroy(this.gameObject);
         //DeSpawn();
     }

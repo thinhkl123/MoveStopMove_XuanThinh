@@ -19,6 +19,13 @@ public class Player : Character
 
     private void Start()
     {
+        LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
+
+        //OnInit();
+    }
+
+    private void LevelManager_OnLoadLevel(object sender, System.EventArgs e)
+    {
         OnInit();
     }
 
@@ -30,6 +37,11 @@ public class Player : Character
 
     private void Update()
     {
+        if (GameManager.Ins.state != GameManager.GameState.Playing)
+        {
+            return;
+        }
+
         if (isDead)
         {
             rb.velocity = Vector3.zero;

@@ -17,14 +17,23 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    private int curIdxLevel = 1;
+    public int curMaxLevel;
+    public int curIdxLevel = 1;
+
+    private void Awake()
+    {
+        curMaxLevel = DataManager.Ins.GetLevel();
+        curIdxLevel = curMaxLevel;
+    }
 
     private void Start()
     {
-        LoadLevel();
+        //LoadLevel();
+
+        
     }
 
-    private void LoadLevel()
+    public void LoadLevel()
     {
 
         int initalCharAmount = levelSOList[curIdxLevel-1].initalAmount;

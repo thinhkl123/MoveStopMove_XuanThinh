@@ -48,7 +48,10 @@ public class Indicator : MonoBehaviour
     public void SetImageColor(Color color)
     {
         indicatorImage.color = color;
-        score.color = color;
+        if (score != null)
+        {
+            score.color = color;
+        }
     }
 
     /// <summary>
@@ -67,7 +70,10 @@ public class Indicator : MonoBehaviour
     public void SetTextRotation(Quaternion rotation)
     {
         distanceText.rectTransform.rotation = rotation;
-        score.rectTransform.rotation = rotation;
+        if (score != null)
+        {
+            score.rectTransform.rotation = rotation;
+        }
     }
 
     /// <summary>
@@ -81,7 +87,10 @@ public class Indicator : MonoBehaviour
 
     public void ChangeScoreText(int value)
     {
-        scoreText.text = value.ToString();
+        if (scoreText != null)
+        {
+            scoreText.text = value.ToString();
+        }
     }
 }
 

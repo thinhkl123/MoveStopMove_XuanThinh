@@ -58,8 +58,21 @@ public class DataManager : Singleton<DataManager>
             return JsonUtility.FromJson<GameData>(json);
         }
         else 
-        { 
-            return null; 
+        {
+            gameData = new GameData
+            {
+                coin = 0,
+                level = 1,
+                weaponIds = new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+                hairIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                pantIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                shieldIds = new int[] { 0, 0 },
+                setFullIds = new int[] { 0, 0, 0, 0, 0 }
+            };
+
+            SaveData(gameData);
+
+            return gameData; 
         }
     }
 
@@ -75,7 +88,7 @@ public class DataManager : Singleton<DataManager>
 
     public void UpdateCoin(int value)
     {
-        gameData.coin = value;
+        gameData.coin += value;
     }
 
     public int GetLevel()

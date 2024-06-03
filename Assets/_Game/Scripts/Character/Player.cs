@@ -1,9 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character
 {
+    public static event EventHandler OnLose;
+    public static event EventHandler<OnGetRewardEventArgs> OnGetReward;
+
+    public class OnGetRewardEventArgs: EventArgs
+    {
+        public int reward;
+    }
+
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed = 5f;
 
@@ -20,8 +29,18 @@ public class Player : Character
     private void Start()
     {
         LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
+        GameManager.Ins.OnWin += GameManager_OnWin;
 
         //OnInit();
+    }
+
+    private void GameManager_OnWin(object sender, System.EventArgs e)
+    {
+        animator.SetTrigger("Dead");
+        OnGetReward?.Invoke(this, new OnGetRewardEventArgs()
+        {
+            reward = score
+        });
     }
 
     private void LevelManager_OnLoadLevel(object sender, System.EventArgs e)
@@ -33,10 +52,12 @@ public class Player : Character
     {
         base.OnInit();
         visual.rotation = Quaternion.identity;
+        transform.position = Vector3.zero;
     }
 
     private void Update()
     {
+
         if (GameManager.Ins.state != GameManager.GameState.Playing)
         {
             return;
@@ -77,5 +98,15 @@ public class Player : Character
         }
 
         //Debug.Log(CanAttack());
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        OnGetReward?.Invoke(this, new OnGetRewardEventArgs()
+        {
+            reward = score
+        });
+        OnLose?.Invoke(this, EventArgs.Empty);
     }
 }

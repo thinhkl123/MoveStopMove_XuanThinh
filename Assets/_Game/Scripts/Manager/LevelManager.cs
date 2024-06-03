@@ -35,14 +35,22 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel()
     {
-
         int initalCharAmount = levelSOList[curIdxLevel-1].initalAmount;
+
+        OnLoadLevel?.Invoke(this, EventArgs.Empty);
 
         for (int i = 0; i < initalCharAmount; i++)
         {
             EnemySpawner.Ins.SpawnEnemy();
         }
+    }
 
-        OnLoadLevel?.Invoke(this, EventArgs.Empty);
+    public void UpdateLevel()
+    {
+        if (curIdxLevel > curMaxLevel)
+        {
+            curMaxLevel = curIdxLevel;
+            DataManager.Ins.UpdateLevel(curMaxLevel);
+        }
     }
 }

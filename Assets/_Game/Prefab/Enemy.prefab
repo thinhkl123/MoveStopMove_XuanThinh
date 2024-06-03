@@ -500,7 +500,7 @@ MonoBehaviour:
   poolType: 0
   animator: {fileID: 7874684254511748124}
   visual: {fileID: 270915654165231974}
-  radius: 6.25
+  initalRadius: 6.25
   layerMask:
     serializedVersion: 2
     m_Bits: 640
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColor: {r: 1, g: 0, b: 0, a: 1}
-  needBoxIndicator: 0
+  needBoxIndicator: 1
   needArrowIndicator: 1
   needDistanceText: 0
   indicator: {fileID: 0}

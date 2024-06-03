@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public event EventHandler OnUpdateAlivechar;
     public event EventHandler OnStateChange;
+    public event EventHandler OnWin;
 
     public enum GameState
     {
@@ -20,6 +21,7 @@ public class GameManager : Singleton<GameManager>
     public GameState state;
 
     private float countDownToStartTime = 3f;
+    private int reward;
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
+        Player.OnLose += Player_OnLose;
+        Player.OnGetReward += Player_OnGetReward;
 
         //UIManager.Ins.OpenUI<GamePlayUI>();
 
@@ -51,6 +55,17 @@ public class GameManager : Singleton<GameManager>
         UIManager.Ins.OpenUI<SettingUI>();
         UIManager.Ins.CloseUI<SettingUI>();
 
+    }
+
+    private void Player_OnGetReward(object sender, Player.OnGetRewardEventArgs e)
+    {
+        this.reward = e.reward;
+    }
+
+    private void Player_OnLose(object sender, EventArgs e)
+    {
+        state = GameState.GameOver;
+        Invoke(nameof(Lose), 1.5f);
     }
 
     private void LevelManager_OnLoadLevel(object sender, EventArgs e)
@@ -94,8 +109,33 @@ public class GameManager : Singleton<GameManager>
     public void UpdateAliveChar()
     {
         aliveChar--;
-        EnemySpawner.Ins.SpawnEnemy();
         OnUpdateAlivechar?.Invoke(this, EventArgs.Empty);
+        if (aliveChar == 0)
+        {
+            state = GameState.GameOver;
+            OnWin?.Invoke(this, EventArgs.Empty);
+            LevelManager.Ins.curIdxLevel++;
+            LevelManager.Ins.UpdateLevel();
+            Invoke(nameof(Win), 1.5f);
+        }
+
+        if (aliveChar > 0)
+        {
+            EnemySpawner.Ins.SpawnEnemy();
+        }
+    }
+
+    private void Win()
+    {
+        UIManager.Ins.OpenUI<WinUI>();
+        UIManager.Ins.GetUI<WinUI>().ChangeRewardText(reward);
+    }
+
+    private void Lose()
+    {
+        UIManager.Ins.OpenUI<LostUI>();
+        UIManager.Ins.GetUI<LostUI>().ChangeRewardText(reward);
+        UIManager.Ins.GetUI<LostUI>().ChangeRankText(aliveChar);
     }
 
     public float GetCountDownTime()

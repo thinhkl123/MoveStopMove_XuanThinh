@@ -26,11 +26,6 @@ public class GamePlayUI : UICanvas
         });
     }
 
-    private void OnDestroy()
-    {
-        GameManager.Ins.OnUpdateAlivechar -= GameManager_OnUpdateAlivechar;
-    }
-
     private void GameManager_OnUpdateAlivechar(object sender, System.EventArgs e)
     {
         UpdateTextAlive();

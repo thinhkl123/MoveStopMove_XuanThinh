@@ -18,6 +18,8 @@ public class HomeUI : UICanvas
 
     private void Start()
     {
+        LevelStageUI.OnChoseLevelChange += LevelStageUI_OnChoseLevelChange;
+
         settingBtn.onClick.AddListener(() =>
         {
             UIManager.Ins.OpenUI<SettingUI>();
@@ -42,6 +44,16 @@ public class HomeUI : UICanvas
             UIManager.Ins.OpenUI<SkinShopUI>();
             UIManager.Ins.GetUI<SkinShopUI>().UpdateVisual();
         });
+    }
+
+    private void OnDisable()
+    {
+        LevelStageUI.OnChoseLevelChange -= LevelStageUI_OnChoseLevelChange;
+    }
+
+    private void LevelStageUI_OnChoseLevelChange(object sender, System.EventArgs e)
+    {
+        levelStageUIList[LevelManager.Ins.curIdxLevel-1].UnFocus();
     }
 
     public void UpdateVisual()

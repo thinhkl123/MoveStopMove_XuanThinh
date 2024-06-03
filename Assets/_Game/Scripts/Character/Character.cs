@@ -48,6 +48,7 @@ public class Character : GameUnit
         //visual.rotation = Quaternion.identity;
         //transform.rotation = Quaternion.identity;
         animator.SetFloat("Speed", 0);
+        animator.SetTrigger("Idle");
         score = 0;
         scoreBarUI.UpdateBar(score);
         radius = initalRadius * scale;

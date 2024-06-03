@@ -17,6 +17,7 @@ public class LostUI : UICanvas
             Close(0);
             GameManager.Ins.state = GameManager.GameState.WaitToStart;
             UIManager.Ins.OpenUI<HomeUI>();
+            UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
         });
     }
 
@@ -28,5 +29,6 @@ public class LostUI : UICanvas
     public void ChangeRewardText(int value)
     {
         rewardText.text = value.ToString();
+        DataManager.Ins.UpdateCoin(value);
     }
 }

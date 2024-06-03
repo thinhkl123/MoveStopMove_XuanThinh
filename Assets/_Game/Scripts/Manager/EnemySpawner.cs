@@ -11,6 +11,21 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
+        LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
+    }
+
+    private void LevelManager_OnLoadLevel(object sender, System.EventArgs e)
+    {
+        OnInit();
+    }
+
+    private void OnInit()
+    {
         amountHasSpawned = 0;
     }
 

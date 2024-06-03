@@ -40,6 +40,17 @@ public class Weapon : GameUnit
 
     private void Update()
     {
+        if (GameManager.Ins.state == GameManager.GameState.WaitToStart)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        if (GameManager.Ins.state != GameManager.GameState.Playing)
+        {
+            return;
+        }
+
         if (isLaunch)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, force * Time.deltaTime);

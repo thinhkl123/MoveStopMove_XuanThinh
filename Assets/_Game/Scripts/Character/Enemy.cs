@@ -45,8 +45,16 @@ public class Enemy : Character
 
     private void Update()
     {
+        if (GameManager.Ins.state == GameManager.GameState.WaitToStart)
+        {
+            agent.enabled = false;
+            this.DeSpawn();
+            return;
+        }
+
         if (GameManager.Ins.state != GameManager.GameState.Playing)
         {
+            agent.enabled = false;
             return;
         }
 

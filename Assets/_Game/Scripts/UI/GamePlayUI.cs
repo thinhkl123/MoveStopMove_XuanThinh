@@ -17,6 +17,13 @@ public class GamePlayUI : UICanvas
         {
             UIManager.Ins.OpenUI<PauseUI>();
         });
+
+        settingBtn.onClick.AddListener(() =>
+        {
+            //Close(0);
+            GameManager.Ins.state = GameManager.GameState.Pause;
+            UIManager.Ins.OpenUI<PauseUI>();
+        });
     }
 
     private void OnDestroy()

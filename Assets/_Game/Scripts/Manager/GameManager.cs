@@ -40,8 +40,17 @@ public class GameManager : Singleton<GameManager>
     {
         LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
 
+        //UIManager.Ins.OpenUI<GamePlayUI>();
+
         UIManager.Ins.OpenUI<HomeUI>();
         UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
+
+        UIManager.Ins.OpenUI<PauseUI>();
+        UIManager.Ins.CloseUI<PauseUI>();
+
+        UIManager.Ins.OpenUI<SettingUI>();
+        UIManager.Ins.CloseUI<SettingUI>();
+
     }
 
     private void LevelManager_OnLoadLevel(object sender, EventArgs e)

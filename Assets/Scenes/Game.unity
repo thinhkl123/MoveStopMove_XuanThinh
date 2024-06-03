@@ -4101,6 +4101,34 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc80291127c48c34da0b72e4a046e790, type: 2}
   - {fileID: 11400000, guid: 8262934eec40e514c8589edc5601f36a, type: 2}
   - {fileID: 11400000, guid: b7903639dde635547930fb1810aea2c5, type: 2}
+  hairSOList:
+  - {fileID: 11400000, guid: dad8b8f3b5164634aa8b6dc46846bbcd, type: 2}
+  - {fileID: 11400000, guid: bd99ae377cd175647b754519096b7c57, type: 2}
+  - {fileID: 11400000, guid: 96e79be75caca0f4c98278048cbec04f, type: 2}
+  - {fileID: 11400000, guid: 0472c162bc94d1c4987ca3b1fed8ad12, type: 2}
+  - {fileID: 11400000, guid: ad8de9dcc9d196d4bb069bd480ded950, type: 2}
+  - {fileID: 11400000, guid: 2127ba0f32346ec4bb7900a87313556d, type: 2}
+  - {fileID: 11400000, guid: 1793dd846090dee47bae78b495f18b15, type: 2}
+  - {fileID: 11400000, guid: 0344a1e7a5f81444994aaf316ddb8860, type: 2}
+  - {fileID: 11400000, guid: 87be6a26860544b44926b047d7be989c, type: 2}
+  pantSOList:
+  - {fileID: 11400000, guid: ba7f90c8314c52f4e9c2752acc5d660c, type: 2}
+  - {fileID: 11400000, guid: ebea9f9f0d84a154d9e7f05dddb0d0f8, type: 2}
+  - {fileID: 11400000, guid: 332dd6d375e74384bb8ad3f35fe4729f, type: 2}
+  - {fileID: 11400000, guid: d1934221f0bf65b40804da3b6d6e0227, type: 2}
+  - {fileID: 11400000, guid: 2266f9a8f9e2257499d907af59a3b53e, type: 2}
+  - {fileID: 11400000, guid: 69de35fb463d3674dab0dfd7b8132f47, type: 2}
+  - {fileID: 11400000, guid: 8bc45c282e1c10a4697f39fdd9aee739, type: 2}
+  - {fileID: 11400000, guid: 11d7fb0fd82dcfe48b8d853ab4d48875, type: 2}
+  - {fileID: 11400000, guid: b098d3fa07d732747a746583574e105a, type: 2}
+  shieldSOList:
+  - {fileID: 11400000, guid: 9e42f21b4d11a3d419d7c96c86340ccf, type: 2}
+  - {fileID: 11400000, guid: 0eca7b05ada75d5438a3a2c28be56a12, type: 2}
+  setFullSOList:
+  - {fileID: 11400000, guid: 8f81401c5565dc94dbf061d1994c727a, type: 2}
+  - {fileID: 11400000, guid: 5d09aa29ffbec6442a3cb0b5cc67914f, type: 2}
+  - {fileID: 11400000, guid: 02a20b35b332f0f4f82cfd58c348319c, type: 2}
+  - {fileID: 11400000, guid: 89a34df6962c3644cb6967f09f5b93b6, type: 2}
 --- !u!4 &1777808468
 Transform:
   m_ObjectHideFlags: 0
@@ -4233,7 +4261,7 @@ Transform:
   m_GameObject: {fileID: 1850200244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9914449, z: -0.13052616, w: 0}
-  m_LocalPosition: {x: 0, y: 1.05, z: 8.04}
+  m_LocalPosition: {x: 0, y: 1.27, z: 7.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5416,27 +5444,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_SizeDelta.x
       value: 165
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_SizeDelta.y
       value: 199
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 712.9839
       objectReference: {fileID: 0}
-    - target: {fileID: 3125144185332578519, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
+    - target: {fileID: 3493280113355157330, guid: 2daae03b7998d00409c469d9bf419212, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -181.36197
       objectReference: {fileID: 0}

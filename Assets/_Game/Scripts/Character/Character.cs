@@ -8,12 +8,13 @@ public class Character : GameUnit
 {
     [SerializeField] protected Animator animator;
     [SerializeField] protected Transform visual;
-    [SerializeField] protected float radius = 1.25f * 5f;
+    [SerializeField] protected float initalRadius = 1.25f * 5f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Collider col;
 
     //scale
     public float scale = 1f;
+    protected float radius;
 
     //Skin
     [SerializeField] protected Transform rightHand;
@@ -49,6 +50,7 @@ public class Character : GameUnit
         animator.SetFloat("Speed", 0);
         score = 0;
         scoreBarUI.UpdateBar(score);
+        radius = initalRadius * scale;
     }
 
     public bool CanAttack()
@@ -93,7 +95,7 @@ public class Character : GameUnit
 
     IEnumerator CoolDownAttackTime()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         if (!isDead)
         {
             ResetAttack();
@@ -171,6 +173,7 @@ public class Character : GameUnit
             if (scale <= 2f)
             {
                 transform.localScale = new Vector3(scale, scale, scale);
+                radius = initalRadius * scale;
             }
         }
     }

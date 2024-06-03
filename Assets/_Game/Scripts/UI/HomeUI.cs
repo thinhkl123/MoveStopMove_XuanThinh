@@ -18,10 +18,29 @@ public class HomeUI : UICanvas
 
     private void Start()
     {
+        settingBtn.onClick.AddListener(() =>
+        {
+            UIManager.Ins.OpenUI<SettingUI>();
+        });
+
         playBtn.onClick.AddListener(() =>
         {
             Close(0);
             LevelManager.Ins.LoadLevel();
+        });
+
+        weaponBtn.onClick.AddListener(() =>
+        {
+            Close(0);
+            UIManager.Ins.OpenUI<WeaponShopUI>();
+            UIManager.Ins.GetUI<WeaponShopUI>().UpdateVisual();
+        });
+
+        skinBtn.onClick.AddListener(() =>
+        {
+            Close(0);
+            UIManager.Ins.OpenUI<SkinShopUI>();
+            UIManager.Ins.GetUI<SkinShopUI>().UpdateVisual();
         });
     }
 

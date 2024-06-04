@@ -2739,6 +2739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  mainCamera: {fileID: 963194227}
+  canvasCamera: {fileID: 1850200246}
 --- !u!4 &1211705120
 Transform:
   m_ObjectHideFlags: 0
@@ -4173,15 +4175,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a102c60a3787504796c2dd5f091aabb, type: 2}
   - {fileID: 11400000, guid: a9655618266fee2488ee4d9c6d6bbbe0, type: 2}
   weaponSOList:
-  - {fileID: 11400000, guid: 201f5549707118147b69763a86430b23, type: 2}
-  - {fileID: 11400000, guid: 7c5ad272781f2cb4ab23c1e4d5052b89, type: 2}
-  - {fileID: 11400000, guid: 2aab3484d60ead4449bdfb8f02f70052, type: 2}
-  - {fileID: 11400000, guid: e3e3a38c7759fce48a7f12844d3370bc, type: 2}
-  - {fileID: 11400000, guid: ccdc83a5329baef499582821c3af3e43, type: 2}
-  - {fileID: 11400000, guid: 93e7f32a46a7ead4c998ca9e71bfbf40, type: 2}
-  - {fileID: 11400000, guid: dc80291127c48c34da0b72e4a046e790, type: 2}
   - {fileID: 11400000, guid: 8262934eec40e514c8589edc5601f36a, type: 2}
+  - {fileID: 11400000, guid: ccdc83a5329baef499582821c3af3e43, type: 2}
   - {fileID: 11400000, guid: b7903639dde635547930fb1810aea2c5, type: 2}
+  - {fileID: 11400000, guid: e3e3a38c7759fce48a7f12844d3370bc, type: 2}
+  - {fileID: 11400000, guid: 2aab3484d60ead4449bdfb8f02f70052, type: 2}
+  - {fileID: 11400000, guid: dc80291127c48c34da0b72e4a046e790, type: 2}
+  - {fileID: 11400000, guid: 7c5ad272781f2cb4ab23c1e4d5052b89, type: 2}
+  - {fileID: 11400000, guid: 93e7f32a46a7ead4c998ca9e71bfbf40, type: 2}
+  - {fileID: 11400000, guid: 201f5549707118147b69763a86430b23, type: 2}
   hairSOList:
   - {fileID: 11400000, guid: dad8b8f3b5164634aa8b6dc46846bbcd, type: 2}
   - {fileID: 11400000, guid: bd99ae377cd175647b754519096b7c57, type: 2}
@@ -6013,6 +6015,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1772750572451987312, guid: 3274bd710c2213942966e526807b78aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039944992266381878, guid: 3274bd710c2213942966e526807b78aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359252939857414321, guid: 3274bd710c2213942966e526807b78aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644152165128074459, guid: 3274bd710c2213942966e526807b78aa, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8238053517583274518, guid: 3274bd710c2213942966e526807b78aa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6021,6 +6039,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 750583777}
+    - target: {fileID: 9043461584244721130, guid: 3274bd710c2213942966e526807b78aa, type: 3}
+      propertyPath: defaultMaterialPant
+      value: 
+      objectReference: {fileID: 2100000, guid: 9631ce711a26cb548ab1b59cc30695d5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

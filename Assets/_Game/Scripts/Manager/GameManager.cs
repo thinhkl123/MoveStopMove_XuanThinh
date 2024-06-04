@@ -20,6 +20,9 @@ public class GameManager : Singleton<GameManager>
 
     public GameState state;
 
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera canvasCamera;
+
     private float countDownToStartTime = 3f;
     private int reward;
 
@@ -54,6 +57,8 @@ public class GameManager : Singleton<GameManager>
 
         UIManager.Ins.OpenUI<SettingUI>();
         UIManager.Ins.CloseUI<SettingUI>();
+
+        ChangeToMainCamera();
 
     }
 
@@ -141,5 +146,17 @@ public class GameManager : Singleton<GameManager>
     public float GetCountDownTime()
     {
         return countDownToStartTime;
+    }
+
+    public void ChangeToMainCamera()
+    {
+        mainCamera.gameObject.SetActive(true);
+        canvasCamera.gameObject.SetActive(false);
+    }
+
+    public void ChangeToCanvasCamera()
+    {
+        mainCamera.gameObject.SetActive(false);
+        canvasCamera.gameObject.SetActive(true);
     }
 }

@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public static Player Instance
+    {
+        get;
+        private set;
+    }
+
     public static event EventHandler OnLose;
     public static event EventHandler<OnGetRewardEventArgs> OnGetReward;
 
@@ -15,14 +21,29 @@ public class Player : Character
 
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed = 5f;
+    [SerializeField] private Material defaultMaterialPant;
 
     private Rigidbody rb;
     private float horizontal;
     private float vertical;
     private Vector3 movement;
 
+    //Skin
+    private GameObject hairOb;
+    private GameObject shieldOb;
+
+    //Buff
+    private float rangeBuf;
+    private float speedBuf;
+    private float goldBuf;
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -31,6 +52,7 @@ public class Player : Character
         LevelManager.Ins.OnLoadLevel += LevelManager_OnLoadLevel;
         GameManager.Ins.OnWin += GameManager_OnWin;
 
+        ChangeCurrentSkin();
         //OnInit();
     }
 
@@ -108,5 +130,103 @@ public class Player : Character
             reward = score
         });
         OnLose?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ChangeCurrentSkin()
+    {
+        ChangeWeapon(DataManager.Ins.GetCurrentWeaponId());
+
+        ChangeHair(DataManager.Ins.GetCurrentHairId());
+
+        ChangePant(DataManager.Ins.GetCurrentPantId());
+
+        ChangeShield(DataManager.Ins.GetCurrentShieldId());
+    }
+
+    public void ChangeWeapon(int value)
+    {
+        WeaponSO weaponSO = SOManager.Ins.GetWeaponSO(value - 1);
+
+        if (weaponHand != null)
+        {
+            Destroy(weaponHand.gameObject);
+        }
+
+        Vector3 localPos = weaponSO.weaponOnHand.transform.position;
+        Quaternion localRot = weaponSO.weaponOnHand.transform.rotation;
+
+        weaponHand = Instantiate(weaponSO.weaponOnHand, Vector3.zero, Quaternion.identity, leftHand);
+
+        weaponHand.transform.localPosition = localPos;
+        weaponHand.transform.localRotation = localRot;
+
+        weaponPrefab = weaponSO.weapon;
+    }
+
+    public void ChangeHair(int value)
+    {
+        if (value == 0)
+        {
+            if (hairOb != null)
+            {
+                Destroy(hairOb.gameObject);
+            }
+            return;
+        }
+
+        HairSO hairSO = SOManager.Ins.GetHairSO(value - 1);
+
+        if (hairOb != null)
+        {
+            Destroy(hairOb.gameObject);
+        }
+
+        Vector3 localPos = hairSO.prefab.transform.position;
+        Quaternion localRot = hairSO.prefab.transform.rotation;
+
+        hairOb = Instantiate(hairSO.prefab, Vector3.zero, Quaternion.identity, hair);
+
+        hairOb.transform.localPosition = localPos;
+        hairOb.transform.localRotation = localRot;
+    }
+
+    public void ChangePant(int value)
+    {
+        if (value == 0)
+        {
+            pant.material = defaultMaterialPant;
+            return;
+        }
+
+        PantSO pantSO = SOManager.Ins.GetPantSO(value - 1);
+
+        pant.material = pantSO.material;
+    }
+
+    public void ChangeShield(int value)
+    {
+        if (value == 0)
+        {
+            if (shieldOb != null)
+            {
+                Destroy(hairOb.gameObject);
+            }
+            return;
+        }
+
+        ShieldSO shieldSO = SOManager.Ins.GetShielSO(value - 1);
+
+        if (shieldOb != null)
+        {
+            Destroy(shieldOb.gameObject);
+        }
+
+        Vector3 localPos = shieldSO.prefab.transform.position;
+        Quaternion localRot = shieldSO.prefab.transform.rotation;
+
+        shieldOb = Instantiate(shieldSO.prefab, Vector3.zero, Quaternion.identity, rightHand);
+
+        shieldOb.transform.localPosition = localPos;
+        shieldOb.transform.localRotation = localRot;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378a359364166e6458f8d81d715e57ba, type: 3}
   m_Name: Candy_0
   m_EditorClassIdentifier: 
-  id: 4
+  id: 2
   weaponName: LOLIPOP
   speedBuf: 0
   rangeBuf: 3

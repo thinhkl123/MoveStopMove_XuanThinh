@@ -11,4 +11,8 @@ public class SetFullSO : ScriptableObject
     public int rangeBuf;
     public int speedBuf;
     public int goldBuf;
+    public Material materialBody;
+    public GameObject wing;
+    public GameObject tail;
+    public GameObject specialHair;
 }

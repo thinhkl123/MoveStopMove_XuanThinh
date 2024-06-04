@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378a359364166e6458f8d81d715e57ba, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  id: 9
+  id: 3
   weaponName: KNIFE
   speedBuf: 5
   rangeBuf: 0

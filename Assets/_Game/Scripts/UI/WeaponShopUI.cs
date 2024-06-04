@@ -27,7 +27,12 @@ public class WeaponShopUI : UICanvas
     private bool isBought = true;
     private bool isSelected = true;
 
-    private int initId = 1;
+    private int weaponId = 1;
+
+    private void OnEnable()
+    {
+        weaponId = DataManager.Ins.GetCurrentWeaponId();
+    }
 
     private void Start()
     {
@@ -36,24 +41,25 @@ public class WeaponShopUI : UICanvas
             Close(0);
             UIManager.Ins.OpenUI<HomeUI>();
             UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
+            Player.Instance.ChangeCurrentSkin();
         });
 
         nextBtn.onClick.AddListener(() =>
         {
-            initId++;
-            if (initId > SOManager.Ins.GetWeaponSOCount())
+            weaponId++;
+            if (weaponId > SOManager.Ins.GetWeaponSOCount())
             {
-                initId = 1;
+                weaponId = 1;
             }
             ShowWeapon();
         });
 
         prevBtn.onClick.AddListener(() => 
         {
-            initId--;
-            if (initId < 0)
+            weaponId--;
+            if (weaponId < 0)
             {
-                initId = SOManager.Ins.GetWeaponSOCount();
+                weaponId = SOManager.Ins.GetWeaponSOCount();
             }
             ShowWeapon();
         });
@@ -72,7 +78,7 @@ public class WeaponShopUI : UICanvas
 
     public void ShowWeapon()
     {
-        WeaponSO weaponSO = SOManager.Ins.GetWeaponSO(initId-1);
+        WeaponSO weaponSO = SOManager.Ins.GetWeaponSO(weaponId-1);
         weaponName.text = weaponSO.weaponName;
         weaponIcon.sprite = weaponSO.icon;
         if (weaponSO.speedBuf != 0)
@@ -87,10 +93,31 @@ public class WeaponShopUI : UICanvas
         }
         priceText.text = weaponSO.price.ToString();
 
+        BuyFunction(DataManager.Ins.GetValueWeapon(weaponId));
+
         if (!isBought)
         {
             buyBtn.gameObject.SetActive(true);
             selectBtn.gameObject.SetActive(false);
+
+            buyBtn.onClick.RemoveAllListeners();
+            buyBtn.onClick.AddListener(() =>
+            {
+                if (DataManager.Ins.GetCoin() >= weaponSO.price)
+                {
+                    DataManager.Ins.UpdateCoin(-weaponSO.price);
+                    DataManager.Ins.UpdateWeaponIds(weaponId, 2);
+
+                    Player.Instance.ChangeWeapon(weaponId);
+
+                    UpdateCoin();
+
+                    //Show selected
+                    buyBtn.gameObject.SetActive(false);
+                    selectBtn.gameObject.SetActive(true);
+                    selectImg.sprite = hasSelectBG;
+                }
+            });
         }
         else
         {
@@ -100,10 +127,37 @@ public class WeaponShopUI : UICanvas
             if (isSelected)
             {
                 selectImg.sprite = hasSelectBG;
+                selectBtn.onClick.RemoveAllListeners();
             }
             else
             {
                 selectImg.sprite = selectBG;
+                selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdateWeaponIds(weaponId, 2);
+                });
+            }
+        }
+    }
+
+    private void BuyFunction(int value)
+    {
+        if (value == 0)
+        {
+            isBought = false;
+        }
+        else
+        {
+            isBought = true;
+            if (value == 1)
+            {
+                isSelected = false;
+            }
+            else
+            {
+                isSelected = true;
             }
         }
     }

@@ -18,3 +18,7 @@ MonoBehaviour:
   rangeBuf: 8
   speedBuf: 0
   goldBuf: 0
+  materialBody: {fileID: 2100000, guid: d73ad83dc6cb28044aef8c2e37ca6e77, type: 2}
+  wing: {fileID: 3869854544532059278, guid: 250b9173cf90ab44fb7e145e401abaac, type: 3}
+  tail: {fileID: 2486367336741987961, guid: c877146db391b774dbc275711e11aaf6, type: 3}
+  specialHair: {fileID: 5167484242134000645, guid: becbd465bd5f784408ad6af3a5f2aaa7, type: 3}

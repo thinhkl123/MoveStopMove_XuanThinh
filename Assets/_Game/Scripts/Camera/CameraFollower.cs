@@ -11,7 +11,7 @@ public class CameraFollower : MonoBehaviour
     private Vector3 distance;
     private Player player;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         distance = target.position - transform.position;
         player = target.GetComponent<Player>();

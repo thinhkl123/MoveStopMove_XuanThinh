@@ -81,6 +81,7 @@ public class DataManager : Singleton<DataManager>
         SaveData(gameData);
     }
 
+    //Coin
     public int GetCoin()
     {
         return gameData.coin;
@@ -91,6 +92,7 @@ public class DataManager : Singleton<DataManager>
         gameData.coin += value;
     }
 
+    //Level
     public int GetLevel()
     {
         return gameData.level;
@@ -101,36 +103,175 @@ public class DataManager : Singleton<DataManager>
         gameData.level = value;
     }
 
+    //Weapon
     public int[] GetWeaponIds()
     {
         return gameData.weaponIds;
     }
 
-    public void UpdateWeaponIds(int[] value)
+    public int GetValueWeapon(int id)
     {
-        gameData.weaponIds = value;
+        id--;
+        return gameData.hairIds[id];
     }
 
+    public int GetCurrentWeaponId()
+    {
+        int idx = -1;
+        for (int i = 0; i < gameData.weaponIds.Length; i++)
+        {
+            if (gameData.weaponIds[i] == 2)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx + 1;
+    }
+
+    public void UpdateWeaponIds(int id, int value)
+    {
+        if (value == 2)
+        {
+            if (GetCurrentWeaponId() != 0)
+            {
+                gameData.hairIds[GetCurrentWeaponId() - 1] = 1;
+            }
+            gameData.weaponIds[id - 1] = value;
+        }
+        else
+        {
+            gameData.weaponIds[id - 1] = value;
+        }
+    }
+
+    //Hair
     public int[] GetHairIds()
     {
         return gameData.hairIds;
     }
 
-    public void UpdateHairIds(int[] value)
+    public int GetValueHair(int id)
     {
-        gameData.hairIds = value;
+        id--;
+        return gameData.hairIds[id];
     }
 
+    public int GetCurrentHairId()
+    {
+        int idx = -1;
+        for (int i = 0; i < gameData.hairIds.Length; i++)
+        {
+            if (gameData.hairIds[i] == 2)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx+1;
+    }
+
+    public void UpdateHairIds(int id, int value)
+    {
+        if (value == 2)
+        {
+            if (GetCurrentHairId() != 0)
+            {
+                gameData.hairIds[GetCurrentHairId() -1] = 1;
+            }
+            gameData.hairIds[id-1] = value;
+        }
+        else
+        {
+            gameData.hairIds[id-1] = value;
+        }
+    }
+
+    //Pant
+    public int[] GetPantIds()
+    {
+        return gameData.pantIds;
+    }
+
+    public int GetValuePant(int id)
+    {
+        id--;
+        return gameData.pantIds[id];
+    }
+
+    public int GetCurrentPantId()
+    {
+        int idx = -1;
+        for (int i = 0; i < gameData.pantIds.Length; i++)
+        {
+            if (gameData.pantIds[i] == 2)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx + 1;
+    }
+
+    public void UpdatePantIds(int id, int value)
+    {
+        if (value == 2)
+        {
+            if (GetCurrentPantId() != 0)
+            {
+                gameData.pantIds[GetCurrentPantId() - 1] = 1;
+            }
+            gameData.pantIds[id-1] = value;
+        }
+        else
+        {
+            gameData.pantIds[id-1] = value;
+        }
+    }
+
+    //Shield
     public int[] GetShieldIds()
     {
         return gameData.shieldIds;
     }
 
-    public void UpdateShieldIds(int[] value)
+    public int GetValueShield(int id)
     {
-        gameData.shieldIds = value;
+        id--;
+        return gameData.shieldIds[id];
     }
 
+    public int GetCurrentShieldId()
+    {
+        int idx = -1;
+        for (int i = 0; i < gameData.shieldIds.Length; i++)
+        {
+            if (gameData.shieldIds[i] == 2)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx + 1;
+    }
+
+    public void UpdateShieldIds(int id, int value)
+    {
+        if (value == 2)
+        {
+            if (GetCurrentShieldId() != 0)
+            {
+                gameData.shieldIds[GetCurrentShieldId() - 1] = 1;
+            }
+            gameData.shieldIds[id-1] = value;
+        }
+        else
+        {
+            gameData.shieldIds[id-1] = value;
+        }
+    }
+
+    //Set Full
     public int[] GetSetFullIds()
     {
         return gameData.setFullIds;

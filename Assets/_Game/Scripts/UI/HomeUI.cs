@@ -43,6 +43,7 @@ public class HomeUI : UICanvas
             Close(0);
             UIManager.Ins.OpenUI<SkinShopUI>();
             UIManager.Ins.GetUI<SkinShopUI>().UpdateVisual();
+            GameManager.Ins.ChangeToCanvasCamera();
         });
     }
 

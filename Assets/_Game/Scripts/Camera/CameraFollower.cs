@@ -30,7 +30,7 @@ public class CameraFollower : MonoBehaviour
     {
         Vector3 currentPosition = transform.position;
 
-        Vector3 newDistance = new Vector3(distance.x * player.scale, distance.y * player.scale, distance.z * player.scale);
+        Vector3 newDistance = new Vector3(distance.x * player.newScale, distance.y * player.newScale, distance.z * player.newScale);
 
         Vector3 newPosiotion = target.position - newDistance;
 

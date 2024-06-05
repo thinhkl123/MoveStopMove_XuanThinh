@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: candy_2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f45aa9b66c9c81a4cac7e66fe618e58f, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f45aa9b66c9c81a4cac7e66fe618e58f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -131,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25183cd9a875c204ea80a34424786286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 12
   weaponType: 0
   force: 10
   torqueMag: 5

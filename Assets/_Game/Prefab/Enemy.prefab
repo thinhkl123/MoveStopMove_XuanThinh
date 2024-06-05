@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7621e82c785cda94585ddc5e8fd6b86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 5
   animator: {fileID: 7874684254511748124}
   visual: {fileID: 270915654165231974}
   initalRadius: 6.25

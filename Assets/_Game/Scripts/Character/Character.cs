@@ -14,6 +14,7 @@ public class Character : GameUnit
 
     //scale
     public float scale = 1f;
+    public float newScale;
     protected float radius;
 
     //Skin
@@ -40,9 +41,15 @@ public class Character : GameUnit
     //ScoreBarUI
     [SerializeField] private ScoreBarUI scoreBarUI;
 
+    //Buff
+    protected float rangeBuf = 0;
+    protected float speedBuf = 0;
+    protected float goldBuf = 0;
+
     public virtual void OnInit()
     {
         scale = 1f;
+        newScale = 1f;
         canAttack = true;
         isDead = false;
         //visual.rotation = Quaternion.identity;
@@ -105,15 +112,15 @@ public class Character : GameUnit
 
     public void LaunchWeapon()
     {
-        Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
-        //Weapon weapon = SimplePool.Spawn<Weapon>(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        //Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
+        Weapon weapon = SimplePool.Spawn<Weapon>(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
         //Debug.Log(weapon);
         if (weapon != null)
         {
             weapon.OnInit();
             weapon.SetParent(transform);
             weapon.SetRange(radius);
-            weapon.Launch(target.position);
+            weapon.Launch(target.position, speedBuf);
         }
         weaponHand.SetActive(false);
     }
@@ -173,8 +180,13 @@ public class Character : GameUnit
             scale += 0.1f;
             if (scale <= 2f)
             {
-                transform.localScale = new Vector3(scale, scale, scale);
-                radius = initalRadius * scale;
+                newScale = scale;
+                if (rangeBuf != 0)
+                {
+                    newScale += scale * (rangeBuf / 100);
+                }
+                transform.localScale = new Vector3(newScale, newScale, newScale);
+                radius = initalRadius * newScale;
             }
         }
     }

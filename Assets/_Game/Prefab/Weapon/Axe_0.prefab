@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 1c040a6e7d23e904b87e93fb9c66a037, type: 3}
       propertyPath: m_Name
-      value: Weapon
+      value: Axe_0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1c040a6e7d23e904b87e93fb9c66a037, type: 3}
       propertyPath: m_TagString
@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25183cd9a875c204ea80a34424786286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 8
+  weaponType: 0
   force: 7
   torqueMag: 500
 --- !u!65 &4862143032983764462

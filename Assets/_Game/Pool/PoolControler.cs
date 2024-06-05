@@ -149,6 +149,18 @@ public enum PoolType
     Bullet_2,
     Bullet_3,
     Bullet_4,
+
+    Enemy,
+    Weapon,
+    Arrow,
+    Axe_0,
+    Boomerang,
+    Candy_0,
+    Candy_1,
+    Candy_2,
+    Candy_4,
+    Harmer,
+    Knife
 }
 
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : Character
 {
@@ -17,6 +18,7 @@ public class Player : Character
     public class OnGetRewardEventArgs: EventArgs
     {
         public int reward;
+        public float buff;
     }
 
     [SerializeField] private Joystick joystick;
@@ -31,11 +33,6 @@ public class Player : Character
     //Skin
     private GameObject hairOb;
     private GameObject shieldOb;
-
-    //Buff
-    private float rangeBuf;
-    private float speedBuf;
-    private float goldBuf;
 
     private void Awake()
     {
@@ -127,13 +124,18 @@ public class Player : Character
         base.OnDeath();
         OnGetReward?.Invoke(this, new OnGetRewardEventArgs()
         {
-            reward = score
+            reward = score,
+            buff = goldBuf,
         });
         OnLose?.Invoke(this, EventArgs.Empty);
     }
 
     public void ChangeCurrentSkin()
     {
+        rangeBuf = 0;
+        speedBuf = 0;
+        goldBuf = 0;
+
         ChangeWeapon(DataManager.Ins.GetCurrentWeaponId());
 
         ChangeHair(DataManager.Ins.GetCurrentHairId());
@@ -161,6 +163,9 @@ public class Player : Character
         weaponHand.transform.localRotation = localRot;
 
         weaponPrefab = weaponSO.weapon;
+
+        speedBuf += weaponSO.speedBuf;
+        rangeBuf += weaponSO.rangeBuf;
     }
 
     public void ChangeHair(int value)
@@ -188,6 +193,8 @@ public class Player : Character
 
         hairOb.transform.localPosition = localPos;
         hairOb.transform.localRotation = localRot;
+
+        rangeBuf += hairSO.rangeBuf;
     }
 
     public void ChangePant(int value)
@@ -201,6 +208,8 @@ public class Player : Character
         PantSO pantSO = SOManager.Ins.GetPantSO(value - 1);
 
         pant.material = pantSO.material;
+
+        speedBuf += pantSO.speedBuf;
     }
 
     public void ChangeShield(int value)
@@ -228,5 +237,7 @@ public class Player : Character
 
         shieldOb.transform.localPosition = localPos;
         shieldOb.transform.localRotation = localRot;
+
+        goldBuf += shieldSO.goldBuf;
     }
 }

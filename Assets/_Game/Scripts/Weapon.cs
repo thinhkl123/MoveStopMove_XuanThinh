@@ -21,6 +21,8 @@ public class Weapon : GameUnit
     private Vector3 target;
     private float range;
 
+    private float speed;
+
     private Rigidbody rb;
 
     private void Awake()
@@ -53,13 +55,21 @@ public class Weapon : GameUnit
 
         if (isLaunch)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, force * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
     }
 
-    public void Launch(Vector3 target)
+    public void Launch(Vector3 target, float buff = 0)
     {
         SetTarget(target);
+        if (buff != 0f)
+        {
+            speed = force * (1+ buff/100);
+        }
+        else
+        {
+            speed = force;
+        }
         isLaunch = true;
         //rb.AddForce(direction.normalized * force, ForceMode.Impulse);
         //rb.AddTorque(Vector3.up * torqueMag);
@@ -119,7 +129,7 @@ public class Weapon : GameUnit
             }
         }
         //Debug.Log(other + " " + other.gameObject.tag);
-        Destroy(this.gameObject);
-        //DeSpawn();
+        //Destroy(this.gameObject);
+        DeSpawn();
     }
 }

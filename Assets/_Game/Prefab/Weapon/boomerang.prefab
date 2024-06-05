@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boomerang
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cb6e597070ed41f4eb5cb9583c725959, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cb6e597070ed41f4eb5cb9583c725959, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -99,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25183cd9a875c204ea80a34424786286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 9
   weaponType: 2
   force: 10
   torqueMag: 5

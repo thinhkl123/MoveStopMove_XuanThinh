@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
 
     private float countDownToStartTime = 3f;
     private int reward;
+    private float goldBuff;
 
     private void Awake()
     {
@@ -65,6 +66,7 @@ public class GameManager : Singleton<GameManager>
     private void Player_OnGetReward(object sender, Player.OnGetRewardEventArgs e)
     {
         this.reward = e.reward;
+        this.goldBuff = e.buff;
     }
 
     private void Player_OnLose(object sender, EventArgs e)
@@ -133,6 +135,7 @@ public class GameManager : Singleton<GameManager>
     private void Win()
     {
         UIManager.Ins.OpenUI<WinUI>();
+        reward += (int) (reward * (goldBuff / 100));
         UIManager.Ins.GetUI<WinUI>().ChangeRewardText(reward);
     }
 

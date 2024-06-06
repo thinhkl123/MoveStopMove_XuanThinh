@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCircle : MonoBehaviour
 {
+    [SerializeField] Player player;
     [SerializeField] private LayerMask enemyLayer;
     private void OnTriggerEnter(Collider other)
     {
@@ -12,7 +13,11 @@ public class PlayerCircle : MonoBehaviour
             if ((enemyLayer & 1 << other.gameObject.layer) == 1 << other.gameObject.layer)
             {
                 Enemy enemy = Cache.GetEnemy(other);
-                enemy.ShowTarget();
+                player.GetTarget();
+                if (Vector3.Distance(enemy.transform.position, player.target.position) <= 0.1f)
+                {
+                    enemy.ShowTarget();
+                }
             }
         }
     }

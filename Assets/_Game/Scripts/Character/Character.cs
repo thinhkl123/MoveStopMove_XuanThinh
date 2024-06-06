@@ -30,7 +30,7 @@ public class Character : GameUnit
     [SerializeField] protected GameObject weaponHand;
     private Collider[] colliders;
     public bool canAttack;
-    private Transform target;
+    public Transform target;
 
     //Dead
     protected bool isDead = false;
@@ -61,7 +61,7 @@ public class Character : GameUnit
         radius = initalRadius * scale;
     }
 
-    public bool CanAttack()
+    public void GetTarget()
     {
         colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
 
@@ -71,12 +71,10 @@ public class Character : GameUnit
             colliders = colliders.Where((val, idx) => idx != index).ToArray();
         }
 
-        return colliders.Length > 0;
-    }
-
-    public void Attack()
-    {
-        animator.SetTrigger("Attack");
+        if (colliders.Length <= 0)
+        {
+            return;
+        }
 
         float minDis = Vector3.Distance(transform.position, colliders[0].gameObject.transform.position);
         target = colliders[0].gameObject.transform;
@@ -90,6 +88,18 @@ public class Character : GameUnit
                 target = colliders[i].gameObject.transform;
             }
         }
+    }
+
+    public bool CanAttack()
+    {
+        GetTarget();
+
+        return colliders.Length > 0;
+    }
+
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
 
         //target.transform.position = new Vector3(target.position.x, 0f, target.position.z);
 
@@ -110,7 +120,7 @@ public class Character : GameUnit
         }
     }
 
-    public void LaunchWeapon()
+    public virtual void LaunchWeapon()
     {
         //Weapon weapon = Instantiate(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
         Weapon weapon = SimplePool.Spawn<Weapon>(weaponPrefab, launchPoint.position, weaponPrefab.transform.rotation);
@@ -169,7 +179,7 @@ public class Character : GameUnit
         scoreBarUI.ChangeColorBar(color);
     }
 
-    public void ChangeScore(int value)
+    public virtual void ChangeScore(int value)
     {
         //Debug.Log(value);
         score += value;
@@ -188,6 +198,14 @@ public class Character : GameUnit
                 transform.localScale = new Vector3(newScale, newScale, newScale);
                 radius = initalRadius * newScale;
             }
+        }
+    }
+
+    public void UpdateScore(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            ChangeScore(1);
         }
     }
 }

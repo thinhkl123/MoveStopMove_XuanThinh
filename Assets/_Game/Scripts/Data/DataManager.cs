@@ -47,7 +47,7 @@ public class DataManager : Singleton<DataManager>
     {
         string json = JsonUtility.ToJson(gameData);
         File.WriteAllText(filePath, json);
-        Debug.Log("File Saved");
+        //Debug.Log("File Saved");
     }
 
     public GameData LoadData()
@@ -112,7 +112,7 @@ public class DataManager : Singleton<DataManager>
     public int GetValueWeapon(int id)
     {
         id--;
-        return gameData.hairIds[id];
+        return gameData.weaponIds[id];
     }
 
     public int GetCurrentWeaponId()

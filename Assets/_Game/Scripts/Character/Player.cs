@@ -119,6 +119,12 @@ public class Player : Character
         //Debug.Log(CanAttack());
     }
 
+    public override void LaunchWeapon()
+    {
+        base.LaunchWeapon();
+        SoundManager.Ins.PlayThrowWeaponSound();
+    }
+
     public override void OnDeath()
     {
         base.OnDeath();

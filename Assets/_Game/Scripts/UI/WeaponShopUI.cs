@@ -32,6 +32,7 @@ public class WeaponShopUI : UICanvas
     private void OnEnable()
     {
         weaponId = DataManager.Ins.GetCurrentWeaponId();
+        Debug.Log(weaponId);
     }
 
     private void Start()
@@ -39,6 +40,7 @@ public class WeaponShopUI : UICanvas
         homeBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<HomeUI>();
             UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
             Player.Instance.ChangeCurrentSkin();
@@ -46,6 +48,7 @@ public class WeaponShopUI : UICanvas
 
         nextBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             weaponId++;
             if (weaponId > SOManager.Ins.GetWeaponSOCount())
             {
@@ -56,8 +59,9 @@ public class WeaponShopUI : UICanvas
 
         prevBtn.onClick.AddListener(() => 
         {
+            SoundManager.Ins.PlayClickBtnSound();
             weaponId--;
-            if (weaponId < 0)
+            if (weaponId <= 0)
             {
                 weaponId = SOManager.Ins.GetWeaponSOCount();
             }

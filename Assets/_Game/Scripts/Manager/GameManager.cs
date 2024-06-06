@@ -99,6 +99,7 @@ public class GameManager : Singleton<GameManager>
                 if (countDownToStartTime <= 0f)
                 {
                     state = GameState.Playing;
+                    SoundManager.Ins.PlayBGMusic();
                     OnStateChange?.Invoke(this, EventArgs.Empty);
                     UIManager.Ins.CloseUI<CountDownUI>();
                     countDownToStartTime = 3f;
@@ -134,6 +135,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Win()
     {
+        SoundManager.Ins.StopBGMsuic();
+        SoundManager.Ins.PlayWinSound();
         UIManager.Ins.OpenUI<WinUI>();
         reward += (int) (reward * (goldBuff / 100));
         UIManager.Ins.GetUI<WinUI>().ChangeRewardText(reward);
@@ -141,6 +144,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Lose()
     {
+        SoundManager.Ins.StopBGMsuic();
+        SoundManager.Ins.PlayLoseSound();
         UIManager.Ins.OpenUI<LostUI>();
         UIManager.Ins.GetUI<LostUI>().ChangeRewardText(reward);
         UIManager.Ins.GetUI<LostUI>().ChangeRankText(aliveChar);

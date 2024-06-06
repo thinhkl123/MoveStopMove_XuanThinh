@@ -12,6 +12,7 @@ public class SettingUI : UICanvas
         closeBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
         });
     }
 }

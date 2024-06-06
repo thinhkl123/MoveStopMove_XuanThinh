@@ -18,6 +18,7 @@ public class CountDownUI : UICanvas
 
         if (prevTime != currentTime)
         {
+            SoundManager.Ins.PlayCountDownSound();
             prevTime = currentTime;
             animator.SetTrigger("NumberPopUp");
         }

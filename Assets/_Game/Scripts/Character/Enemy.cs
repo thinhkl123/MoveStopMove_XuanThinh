@@ -21,6 +21,7 @@ public class Enemy : Character
     private float currentTimeIdle;
     private NavMeshAgent agent;
     private Vector3 destination;
+    private float timeToAttack;
 
     private void Awake()
     {
@@ -68,7 +69,8 @@ public class Enemy : Character
                 }
                 break;
             case EnemyState.Seek:
-                if (CanAttack() && canAttack)
+                timeToAttack -= Time.deltaTime;
+                if (CanAttack() && canAttack && timeToAttack <= 0f)
                 {
                     agent.enabled = false;
                     ChangeToState(EnemyState.Attack);
@@ -112,6 +114,7 @@ public class Enemy : Character
                 timeIdle = Random.Range(2, 5f);
                 break;
             case EnemyState.Seek:
+                timeToAttack = Random.Range(3f, 5f);
                 agent.enabled = true;
                 destination = transform.position;
                 if (GetRandomPoint(transform.position, out destination, 20f))
@@ -206,5 +209,11 @@ public class Enemy : Character
         weaponHand.transform.localRotation = localRot;
 
         weaponPrefab = weaponSO.weapon;
+    }
+
+    public override void ChangeScore(int value)
+    {
+        base.ChangeScore(value);
+        targetArrow.SetScore(score);
     }
 }

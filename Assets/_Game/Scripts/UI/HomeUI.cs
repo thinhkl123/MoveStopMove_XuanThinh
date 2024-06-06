@@ -22,18 +22,21 @@ public class HomeUI : UICanvas
 
         settingBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<SettingUI>();
         });
 
         playBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             LevelManager.Ins.LoadLevel();
         });
 
         weaponBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<WeaponShopUI>();
             UIManager.Ins.GetUI<WeaponShopUI>().UpdateVisual();
         });
@@ -41,6 +44,7 @@ public class HomeUI : UICanvas
         skinBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<SkinShopUI>();
             UIManager.Ins.GetUI<SkinShopUI>().UpdateVisual();
             GameManager.Ins.ChangeToCanvasCamera();

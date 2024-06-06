@@ -13,14 +13,18 @@ public class GamePlayUI : UICanvas
     {
         GameManager.Ins.OnUpdateAlivechar += GameManager_OnUpdateAlivechar;
 
+        /*
         settingBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<PauseUI>();
         });
+        */
 
         settingBtn.onClick.AddListener(() =>
         {
             //Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             GameManager.Ins.state = GameManager.GameState.Pause;
             UIManager.Ins.OpenUI<PauseUI>();
         });

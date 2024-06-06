@@ -17,18 +17,21 @@ public class PauseUI : UICanvas
         continueBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             GameManager.Ins.state = GameManager.GameState.Playing;
             UIManager.Ins.OpenUI<GamePlayUI>();
         });
 
         settingBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<SettingUI>();
         });
 
         HomeBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             GameManager.Ins.state = GameManager.GameState.WaitToStart;
             UIManager.Ins.OpenUI<HomeUI>();
         });

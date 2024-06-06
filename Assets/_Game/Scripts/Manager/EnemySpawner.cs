@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,15 @@ public class EnemySpawner : Singleton<EnemySpawner>
         enemy.ChangeBody(colorSO.material);
         enemy.ChangeColorTarget(colorSO.color);
         enemy.ChangeColorBar(colorSO.color);
+
+        int l = Math.Max(Player.Instance.score - 5, 0);
+        int r = Player.Instance.score + 5;
+
+        int enemyScore = UnityEngine.Random.Range(l, r);
         enemy.targetArrow.SetScore(enemy.score);
+        enemy.UpdateScore(enemyScore);
+        //Debug.Log(enemyScore.ToString());
+        //enemy.targetArrow.SetScore(enemy.score);
         amountHasSpawned++;
     }
 }

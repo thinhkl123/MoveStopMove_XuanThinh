@@ -68,6 +68,7 @@ public class SkinShopUI : UICanvas
         homeBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             UIManager.Ins.OpenUI<HomeUI>();
             UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
             GameManager.Ins.ChangeToMainCamera();
@@ -76,31 +77,37 @@ public class SkinShopUI : UICanvas
 
         nextBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             NextSkinId(skinType);
         });
 
         prevBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             PrevSkinId(skinType);
         });
 
         hairBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             ChangeSkinType(SkinType.Hair);
         });
 
         pantBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             ChangeSkinType(SkinType.Pant);
         });
 
         shieldBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             ChangeSkinType(SkinType.Shield);
         });
 
         setFullBtn.onClick.AddListener(() =>
         {
+            SoundManager.Ins.PlayClickBtnSound();
             ChangeSkinType(SkinType.SetFull);
         });
         

@@ -14,9 +14,11 @@ public class WinUI : UICanvas
         claimBtn.onClick.AddListener(() =>
         {
             Close(0);
+            SoundManager.Ins.PlayClickBtnSound();
             GameManager.Ins.state = GameManager.GameState.WaitToStart;
             UIManager.Ins.OpenUI<HomeUI>();
             UIManager.Ins.GetUI<HomeUI>().UpdateVisual();
+            SoundManager.Ins.StopWinSound();
         });
     }
 

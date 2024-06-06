@@ -9,11 +9,11 @@ public class UICanvas : MonoBehaviour
 
     protected RectTransform m_RectTransform;
     private Animator m_Animator;
-    private float m_OffsetY = 0;
+    //private float m_OffsetY = 0;
 
     private void Start()
     {
-        //OnInit();
+        OnInit();
     }
 
     //Init default Canvas
@@ -23,6 +23,7 @@ public class UICanvas : MonoBehaviour
         m_RectTransform = GetComponent<RectTransform>();
         m_Animator = GetComponent<Animator>();
 
+        /*
         // xu ly tai tho
         float ratio = (float)Screen.height / (float)Screen.width;
         if (ratio > 2.1f)
@@ -35,6 +36,7 @@ public class UICanvas : MonoBehaviour
             m_RectTransform.offsetMin = leftBottom;
             m_OffsetY = 100f;
         }
+        */
     }
 
     //Setup canvas to avoid flash UI

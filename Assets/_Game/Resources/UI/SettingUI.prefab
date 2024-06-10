@@ -277,6 +277,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
   closeBtn: {fileID: 1765074508513440138}
+  soundVFXVolume: {fileID: 5888813147904273357}
+  musicVolume: {fileID: 5564806739241834453}
 --- !u!1 &258693642827625653
 GameObject:
   m_ObjectHideFlags: 0

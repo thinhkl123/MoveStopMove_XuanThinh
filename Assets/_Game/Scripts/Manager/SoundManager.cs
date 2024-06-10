@@ -12,6 +12,20 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] private AudioSource winSound;
     [SerializeField] private AudioSource loseSound;
 
+    public void ChangeVolumeBGMusic(float value)
+    {
+        bgMusic.volume = value;
+    }    
+
+    public void ChangeVolumeVFXSound(float value)
+    {
+        throwWeaponSound.volume = value;
+        collideWeaponSound.volume = value;
+        countDownSound.volume = value;
+        winSound.volume = value;
+        loseSound.volume = value;
+    }
+
     public void PlayBGMusic()
     {
         bgMusic.Play();

@@ -25,6 +25,10 @@ public class Weapon : GameUnit
 
     private Rigidbody rb;
 
+    //Bomerang
+    private bool isBack;
+    private float timeToBack;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,6 +57,21 @@ public class Weapon : GameUnit
             return;
         }
 
+        if (weaponType == WeaponType.Bomerang)
+        {
+            if (isBack)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, parent.position, speed * Time.deltaTime);
+                return;
+            }
+
+            timeToBack += Time.deltaTime;
+            if (timeToBack >= range / speed)
+            {
+                isBack = true;
+            }
+        }
+
         if (isLaunch)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -77,8 +96,17 @@ public class Weapon : GameUnit
         {
             rb.AddTorque(Vector3.up * torqueMag, ForceMode.Impulse);
         }
-        Destroy(gameObject, range / force);
-        //Invoke(nameof(DeSpawn), range / force);
+        //Destroy(gameObject, range / force);
+        if (weaponType != WeaponType.Bomerang)
+        {
+            Invoke(nameof(DeSpawn), range / speed);
+        }
+        else
+        {
+            Invoke(nameof(DeSpawn), range*2 / speed);
+            timeToBack = 0f;
+            isBack = false;
+        }
     } 
 
     public void SetRange(float value)

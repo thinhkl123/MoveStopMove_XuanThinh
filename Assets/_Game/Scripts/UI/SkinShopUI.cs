@@ -61,6 +61,7 @@ public class SkinShopUI : UICanvas
         hairId = DataManager.Ins.GetCurrentHairId() != 0 ? DataManager.Ins.GetCurrentHairId() : 1;
         pantId = DataManager.Ins.GetCurrentPantId() != 0 ? DataManager.Ins.GetCurrentPantId() : 1;
         shieldId = DataManager.Ins.GetCurrentShieldId() != 0 ? DataManager.Ins.GetCurrentShieldId() : 1;
+        setFullId = DataManager.Ins.GetCurrentSetFullId() != 0 ? DataManager.Ins.GetCurrentSetFullId() : 1;
     }
 
     private void Start()
@@ -294,20 +295,49 @@ public class SkinShopUI : UICanvas
             buyBtn.gameObject.SetActive(false);
             selectBtn.gameObject.SetActive(true);
 
+            selectBtn.onClick.RemoveAllListeners();
+            selectBtn.onClick.AddListener(() =>
+            {
+                isSelected = !isSelected;
+
+                if (isSelected)
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdateHairIds(hairId, 2);
+                    Player.Instance.ChangeHair(hairId);
+                }
+                else
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateHairIds(hairId, 1);
+                    Player.Instance.ChangeHair(0);
+                }
+            });
+
             if (isSelected)
             {
                 selectImg.sprite = hasSelectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateHairIds(hairId, 1);
+                    Player.Instance.ChangeHair(0);
+                });
+                */
             }
             else
             {
                 selectImg.sprite = selectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
                 selectBtn.onClick.AddListener(() => 
                 {
                     selectImg.sprite = hasSelectBG;
                     DataManager.Ins.UpdateHairIds(hairId, 2);
                 });
+                */
             }
         }
     }
@@ -351,20 +381,49 @@ public class SkinShopUI : UICanvas
             buyBtn.gameObject.SetActive(false);
             selectBtn.gameObject.SetActive(true);
 
+            selectBtn.onClick.RemoveAllListeners();
+            selectBtn.onClick.AddListener(() =>
+            {
+                isSelected = !isSelected;
+
+                if (isSelected)
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdatePantIds(pantId, 2);
+                    Player.Instance.ChangePant(pantId);
+                }
+                else
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdatePantIds(pantId, 1);
+                    Player.Instance.ChangePant(0);
+                }
+            });
+
             if (isSelected)
             {
                 selectImg.sprite = hasSelectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdatePantIds(pantId, 1);
+                    Player.Instance.ChangePant(0);
+                });
+                */
             }
             else
             {
                 selectImg.sprite = selectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
                 selectBtn.onClick.AddListener(() =>
                 {
                     selectImg.sprite = hasSelectBG;
                     DataManager.Ins.UpdatePantIds(pantId, 2);
                 });
+                */
             }
         }
     }
@@ -408,20 +467,49 @@ public class SkinShopUI : UICanvas
             buyBtn.gameObject.SetActive(false);
             selectBtn.gameObject.SetActive(true);
 
+            selectBtn.onClick.RemoveAllListeners();
+            selectBtn.onClick.AddListener(() =>
+            {
+                isSelected = !isSelected;
+
+                if (isSelected)
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdateShieldIds(shieldId, 2);
+                    Player.Instance.ChangeShield(shieldId);
+                }
+                else
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateShieldIds(shieldId, 1);
+                    Player.Instance.ChangeShield(0);
+                }
+            });
+
             if (isSelected)
             {
                 selectImg.sprite = hasSelectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateShieldIds(shieldId, 1);
+                    Player.Instance.ChangeShield(0);
+                });
+                */
             }
             else
             {
                 selectImg.sprite = selectBG;
+                /*
                 selectBtn.onClick.RemoveAllListeners();
                 selectBtn.onClick.AddListener(() =>
                 {
                     selectImg.sprite = hasSelectBG;
                     DataManager.Ins.UpdateShieldIds(shieldId, 2);
                 });
+                */
             }
         }
     }
@@ -429,43 +517,92 @@ public class SkinShopUI : UICanvas
     private void ShowSetFull()
     {
         SetFullSO setFullSO = SOManager.Ins.GetSetFullSO(setFullId-1);
-        skinIcon.sprite = setFullSO.icon;
-        if (setFullSO.speedBuf != 0)
+        if (setFullSO.icon  != null)
         {
-            buffText.text = "Attack Speed";
-            valueBuffText.text = "+" + setFullSO.speedBuf.ToString() + "%";
-        }
-        else if (setFullSO.rangeBuf != 0) 
-        {
-            buffText.text = "Range";
-            valueBuffText.text = "+" + setFullSO.rangeBuf.ToString() + "%";
+            skinIcon.sprite = setFullSO.icon;
         }
         else
         {
-            buffText.text = "Gold";
-            valueBuffText.text = "+" + setFullSO.goldBuf.ToString() + "%";
+            skinIcon.sprite = null;
         }
+        buffText.text = "";
+        valueBuffText.text = setFullSO.setFullName;
         priceText.text = setFullSO.price.ToString();
 
-        isBought = false;
+        Player.Instance.ChangeSetFull(setFullId);
+
+        BuyFunction(DataManager.Ins.GetValueSetFull(setFullId));
 
         if (!isBought)
         {
             buyBtn.gameObject.SetActive(true);
             selectBtn.gameObject.SetActive(false);
+
+            buyBtn.onClick.RemoveAllListeners();
+            buyBtn.onClick.AddListener(() =>
+            {
+                if (DataManager.Ins.GetCoin() >= setFullSO.price)
+                {
+                    DataManager.Ins.UpdateCoin(-setFullSO.price);
+                    DataManager.Ins.UpdateSetFullIds(setFullId, 2);
+
+                    ChangeCoin();
+
+                    //Show selected
+                    buyBtn.gameObject.SetActive(false);
+                    selectBtn.gameObject.SetActive(true);
+                    selectImg.sprite = hasSelectBG;
+                }
+            });
         }
         else
         {
             buyBtn.gameObject.SetActive(false);
             selectBtn.gameObject.SetActive(true);
 
+            selectBtn.onClick.RemoveAllListeners();
+            selectBtn.onClick.AddListener(() =>
+            {
+                isSelected = !isSelected;
+
+                if (isSelected)
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdateSetFullIds(setFullId, 2);
+                    Player.Instance.ChangeSetFull(setFullId);
+                }
+                else
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateSetFullIds(setFullId, 1);
+                    Player.Instance.ChangeSetFull(0);
+                }
+            });
+
             if (isSelected)
             {
                 selectImg.sprite = hasSelectBG;
+                /*
+                selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = selectBG;
+                    DataManager.Ins.UpdateSetFullIds(setFullId, 1);
+                    Player.Instance.ChangeSetFull(0);
+                });
+                */
             }
             else
             {
                 selectImg.sprite = selectBG;
+                /*
+                selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() =>
+                {
+                    selectImg.sprite = hasSelectBG;
+                    DataManager.Ins.UpdateSetFullIds(setFullId, 2);
+                });
+                */
             }
         }
     }

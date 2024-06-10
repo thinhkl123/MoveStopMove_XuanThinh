@@ -16,6 +16,7 @@ public class PlayerCircle : MonoBehaviour
                 player.GetTarget();
                 if (Vector3.Distance(enemy.transform.position, player.target.position) <= 0.1f)
                 {
+                    Debug.Log(enemy);
                     enemy.ShowTarget();
                 }
             }

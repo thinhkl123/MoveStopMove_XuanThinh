@@ -34,6 +34,7 @@ public class PauseUI : UICanvas
             SoundManager.Ins.PlayClickBtnSound();
             GameManager.Ins.state = GameManager.GameState.WaitToStart;
             UIManager.Ins.OpenUI<HomeUI>();
+            SoundManager.Ins.StopBGMsuic();
         });
     }
 

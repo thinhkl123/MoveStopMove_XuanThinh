@@ -24,6 +24,7 @@ public class Player : Character
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed = 5f;
     [SerializeField] private Material defaultMaterialPant;
+    [SerializeField] private Material defaultMaterialBody;
 
     private Rigidbody rb;
     private float horizontal;
@@ -33,6 +34,15 @@ public class Player : Character
     //Skin
     private GameObject hairOb;
     private GameObject shieldOb;
+
+    //SetFull
+    [SerializeField] private Transform wingPos;
+    [SerializeField] private Transform tailPos;
+    [SerializeField] private Transform headPos;
+
+    private GameObject wingOb;
+    private GameObject tailOb;
+    private GameObject headOb;
 
     private void Awake()
     {
@@ -76,7 +86,6 @@ public class Player : Character
 
     private void Update()
     {
-
         if (GameManager.Ins.state != GameManager.GameState.Playing)
         {
             return;
@@ -87,6 +96,8 @@ public class Player : Character
             rb.velocity = Vector3.zero;
             return;
         }
+
+        GetTarget();
 
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
@@ -125,6 +136,20 @@ public class Player : Character
         SoundManager.Ins.PlayThrowWeaponSound();
     }
 
+    public override void GetTarget()
+    {
+        base.GetTarget();
+        if (target == null)
+        {
+            return;
+        }
+        Enemy enemy = target.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.ShowTarget();
+        }
+    }
+
     public override void OnDeath()
     {
         base.OnDeath();
@@ -149,6 +174,8 @@ public class Player : Character
         ChangePant(DataManager.Ins.GetCurrentPantId());
 
         ChangeShield(DataManager.Ins.GetCurrentShieldId());
+
+        ChangeSetFull(DataManager.Ins.GetCurrentSetFullId());
     }
 
     public void ChangeWeapon(int value)
@@ -224,7 +251,7 @@ public class Player : Character
         {
             if (shieldOb != null)
             {
-                Destroy(hairOb.gameObject);
+                Destroy(shieldOb.gameObject);
             }
             return;
         }
@@ -245,5 +272,78 @@ public class Player : Character
         shieldOb.transform.localRotation = localRot;
 
         goldBuf += shieldSO.goldBuf;
+    }
+
+    public void ChangeSetFull(int value)
+    {
+        if (wingOb != null)
+        {
+            Destroy(wingOb.gameObject);
+        }
+        if (tailOb != null)
+        {
+            Destroy(tailOb.gameObject);
+        }
+        if (headOb != null)
+        {
+            Destroy(headOb.gameObject);
+        }
+
+        body.material = defaultMaterialBody;
+
+        if (value == 0)
+        {
+            return;
+        }
+
+        SetFullSO setFullSO = SOManager.Ins.GetSetFullSO(value - 1);
+
+        body.material = setFullSO.materialBody;
+
+        if (setFullSO.wing != null)
+        {
+            ChangeWing(setFullSO.wing);
+        }
+        if (setFullSO.tail != null)
+        {
+            ChangeTail(setFullSO.tail);
+        }
+        if (setFullSO.specialHair != null)
+        {
+            ChangeHead(setFullSO.specialHair);
+        }
+    }
+
+    private void ChangeWing(GameObject wingPb)
+    {
+        Vector3 localPos = wingPb.transform.position;
+        Quaternion localRot = wingPb.transform.rotation;
+
+        wingOb = Instantiate(wingPb, Vector3.zero, Quaternion.identity, wingPos);
+
+        wingOb.transform.localPosition = localPos;
+        wingOb.transform.localRotation = localRot;
+    }
+     
+    private void ChangeTail(GameObject tailPb)
+    {
+        Vector3 localPos = tailPb.transform.position;
+        Quaternion localRot = tailPb.transform.rotation;
+
+        tailOb = Instantiate(tailPb, Vector3.zero, Quaternion.identity, tailPos);
+
+        tailOb.transform.localPosition = localPos;
+        tailOb.transform.localRotation = localRot;
+    }
+
+    private void ChangeHead(GameObject headPb)
+    {
+        Vector3 localPos = headPb.transform.position;
+        Quaternion localRot = headPb.transform.rotation;
+
+        headOb = Instantiate(headPb, Vector3.zero, Quaternion.identity, headPos);
+
+        headOb.transform.localPosition = localPos;
+        headOb.transform.localRotation = localRot;
     }
 }

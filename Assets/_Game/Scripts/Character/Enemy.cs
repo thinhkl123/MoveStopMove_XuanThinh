@@ -59,6 +59,11 @@ public class Enemy : Character
             return;
         }
 
+        if (Vector3.Distance(this.transform.position, Player.Instance.transform.position) > Player.Instance.radius)
+        {
+            HideTarget();
+        }
+
         switch (state)
         {
             case EnemyState.Idle:
@@ -111,10 +116,10 @@ public class Enemy : Character
             case EnemyState.Idle:
                 currentTimeIdle = 0;
                 animator.SetFloat("Speed", 0);
-                timeIdle = Random.Range(2, 5f);
+                timeIdle = Random.Range(3, 7f);
                 break;
             case EnemyState.Seek:
-                timeToAttack = Random.Range(3f, 5f);
+                timeToAttack = Random.Range(0f, 3f);
                 agent.enabled = true;
                 destination = transform.position;
                 if (GetRandomPoint(transform.position, out destination, 20f))

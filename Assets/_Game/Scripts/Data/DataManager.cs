@@ -8,12 +8,14 @@ public class DataManager : Singleton<DataManager>
     private string folderPath;
     private string filePath;
 
+    [SerializeField] private TextAsset textAsset;
+
     private GameData gameData;
 
     private void Awake()
     {
         // Set the folder path to the "Data" folder within the project
-        folderPath = Path.Combine(Application.dataPath, "_Game", "Resources", "Data");
+        folderPath = Path.Combine(Application.persistentDataPath, "Resources", "Data");
         // Ensure the folder exists
         if (!Directory.Exists(folderPath))
         {
@@ -45,7 +47,7 @@ public class DataManager : Singleton<DataManager>
 
     public void SaveData(GameData gameData)
     {
-        string json = JsonUtility.ToJson(gameData);
+        string json = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(filePath, json);
         //Debug.Log("File Saved");
     }
@@ -61,9 +63,9 @@ public class DataManager : Singleton<DataManager>
         {
             gameData = new GameData
             {
-                coin = 0,
+                coin = 1000,
                 level = 1,
-                weaponIds = new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+                weaponIds = new int[] { 2, 0, 0, 0, 0, 0, 0, 0, 0 },
                 hairIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 pantIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 shieldIds = new int[] { 0, 0 },
@@ -135,7 +137,7 @@ public class DataManager : Singleton<DataManager>
         {
             if (GetCurrentWeaponId() != 0)
             {
-                gameData.hairIds[GetCurrentWeaponId() - 1] = 1;
+                gameData.weaponIds[GetCurrentWeaponId() - 1] = 1;
             }
             gameData.weaponIds[id - 1] = value;
         }
@@ -277,8 +279,39 @@ public class DataManager : Singleton<DataManager>
         return gameData.setFullIds;
     }
 
-    public void UpdateSetFullIds(int[] value)
+    public int GetValueSetFull(int id)
     {
-        gameData.setFullIds = value;
+        id--;
+        return gameData.setFullIds[id];
+    }
+
+    public int GetCurrentSetFullId()
+    {
+        int idx = -1;
+        for (int i = 0; i < gameData.setFullIds.Length; i++)
+        {
+            if (gameData.setFullIds[i] == 2)
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx + 1;
+    }
+
+    public void UpdateSetFullIds(int id, int value)
+    {
+        if (value == 2)
+        {
+            if (GetCurrentSetFullId() != 0)
+            {
+                gameData.setFullIds[GetCurrentSetFullId() - 1] = 1;
+            }
+            gameData.setFullIds[id - 1] = value;
+        }
+        else
+        {
+            gameData.setFullIds[id - 1] = value;
+        }
     }
 }

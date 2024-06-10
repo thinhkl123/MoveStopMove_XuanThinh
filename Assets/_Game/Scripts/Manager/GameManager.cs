@@ -164,6 +164,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeToCanvasCamera()
     {
+        Player.Instance.OnInit();
         mainCamera.gameObject.SetActive(false);
         canvasCamera.gameObject.SetActive(true);
     }

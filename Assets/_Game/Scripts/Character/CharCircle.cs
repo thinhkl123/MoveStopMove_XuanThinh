@@ -6,9 +6,9 @@ public class CharCircle : MonoBehaviour
 {
     [SerializeField] private Character character;
 
+    /*
     private void OnTriggerExit(Collider other)
     {
-        /*
         if (other.CompareTag("Weapon"))
         {
             Weapon weapon = Cache.GetWeapon(other);
@@ -21,6 +21,6 @@ public class CharCircle : MonoBehaviour
                 }
             }
         }
-        */
     }
+    */
 }

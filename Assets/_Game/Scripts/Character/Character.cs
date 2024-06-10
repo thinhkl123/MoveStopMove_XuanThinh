@@ -15,7 +15,7 @@ public class Character : GameUnit
     //scale
     public float scale = 1f;
     public float newScale;
-    protected float radius;
+    public float radius;
 
     //Skin
     [SerializeField] protected Transform rightHand;
@@ -52,6 +52,7 @@ public class Character : GameUnit
         newScale = 1f;
         canAttack = true;
         isDead = false;
+        col.enabled = true;
         //visual.rotation = Quaternion.identity;
         //transform.rotation = Quaternion.identity;
         animator.SetFloat("Speed", 0);
@@ -61,7 +62,7 @@ public class Character : GameUnit
         radius = initalRadius * scale;
     }
 
-    public void GetTarget()
+    public virtual void GetTarget()
     {
         colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
 
@@ -73,6 +74,7 @@ public class Character : GameUnit
 
         if (colliders.Length <= 0)
         {
+            //target = null;
             return;
         }
 
@@ -99,6 +101,9 @@ public class Character : GameUnit
 
     public void Attack()
     {
+        canAttack = false;
+        StartCoroutine(CoolDownAttackTime());
+
         animator.SetTrigger("Attack");
 
         //target.transform.position = new Vector3(target.position.x, 0f, target.position.z);
@@ -106,9 +111,6 @@ public class Character : GameUnit
         //Debug.Log(target.transform.position);
 
         visual.forward = target.position - transform.position;
-
-        canAttack = false;
-        StartCoroutine(CoolDownAttackTime());
     }
 
     IEnumerator CoolDownAttackTime()
@@ -141,9 +143,9 @@ public class Character : GameUnit
         weaponHand.SetActive(true);
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
-        /*
         if (other.CompareTag("Weapon"))
         {
             Weapon weapon = other.gameObject.GetComponent<Weapon>();
@@ -152,8 +154,8 @@ public class Character : GameUnit
                 OnDeath();
             }
         }
-        */
     }
+    */
 
     public virtual void OnDeath()
     {

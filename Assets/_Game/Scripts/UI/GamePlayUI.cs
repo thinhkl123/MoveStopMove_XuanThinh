@@ -37,6 +37,6 @@ public class GamePlayUI : UICanvas
 
     private void UpdateTextAlive()
     {
-        textAlive.text = "Alive:  " + GameManager.Ins.AliveChar.ToString();
+        textAlive.text = "Alive:  " + (GameManager.Ins.AliveChar+1).ToString();
     }
 }

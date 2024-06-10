@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5f58dca622f3c488f456f63f2991e0, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  charAmount: 50
+  charAmount: 49
   initalAmount: 8

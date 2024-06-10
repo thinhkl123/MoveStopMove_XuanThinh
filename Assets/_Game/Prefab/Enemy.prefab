@@ -196,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1456772443509627597
 Transform:
   m_ObjectHideFlags: 0
@@ -506,6 +506,8 @@ MonoBehaviour:
     m_Bits: 640
   col: {fileID: 2888889531879020855}
   scale: 1
+  newScale: 0
+  radius: 0
   rightHand: {fileID: 8704311011157256340}
   leftHand: {fileID: 4562235395106319892}
   hair: {fileID: 3975022257961510566}
@@ -515,6 +517,7 @@ MonoBehaviour:
   launchPoint: {fileID: 1383634585041954396}
   weaponHand: {fileID: 2540778171153878333}
   canAttack: 0
+  target: {fileID: 0}
   score: 0
   scoreBarUI: {fileID: 8862720012135342505}
   state: 0

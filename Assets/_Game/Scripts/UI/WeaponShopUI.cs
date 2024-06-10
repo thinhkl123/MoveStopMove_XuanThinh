@@ -32,7 +32,6 @@ public class WeaponShopUI : UICanvas
     private void OnEnable()
     {
         weaponId = DataManager.Ins.GetCurrentWeaponId();
-        Debug.Log(weaponId);
     }
 
     private void Start()

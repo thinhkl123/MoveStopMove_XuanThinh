@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Thor
   m_EditorClassIdentifier: 
   id: 4
+  setFullName: Thor
   icon: {fileID: 21300000, guid: 0363a7557b133774f99bf84dcf6fcbed, type: 3}
   price: 5000
-  rangeBuf: 0
-  speedBuf: 0
-  goldBuf: 100
+  materialBody: {fileID: 2100000, guid: 898ec9c35e14a6046ba8736b35a3f0df, type: 2}
+  wing: {fileID: 0}
+  tail: {fileID: 0}
+  specialHair: {fileID: 4131806104453667131, guid: f731fa093acf60d4cad7c4d90ea912d6, type: 3}

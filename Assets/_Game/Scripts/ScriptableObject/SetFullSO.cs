@@ -6,11 +6,9 @@ using UnityEngine;
 public class SetFullSO : ScriptableObject
 {
     public int id;
+    public string setFullName;
     public Sprite icon;
     public int price;
-    public int rangeBuf;
-    public int speedBuf;
-    public int goldBuf;
     public Material materialBody;
     public GameObject wing;
     public GameObject tail;

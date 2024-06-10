@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 7632335363194002288}
   - component: {fileID: 2530522377379722565}
   - component: {fileID: 5926699942174642206}
-  - component: {fileID: 7231827921288575107}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Circle
@@ -301,21 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 9043461584244721130}
---- !u!114 &7231827921288575107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625335214342539695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39816bc7a604aa140a2c5786f9ad9560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &8238053517583274518
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +330,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7925973393014785552}
   - {fileID: 3509515250062474913}
@@ -418,12 +402,14 @@ MonoBehaviour:
   poolType: 0
   animator: {fileID: 249022955505101674}
   visual: {fileID: 7925973393014785552}
-  radius: 6.25
+  initalRadius: 6.25
   layerMask:
     serializedVersion: 2
     m_Bits: 128
   col: {fileID: 7715458987783199620}
   scale: 1
+  newScale: 0
+  radius: 6.25
   rightHand: {fileID: 6354729242447214481}
   leftHand: {fileID: 4134833596070917928}
   hair: {fileID: 3435189725019419201}
@@ -433,10 +419,12 @@ MonoBehaviour:
   launchPoint: {fileID: 4049037240666170370}
   weaponHand: {fileID: 2039944992266381878}
   canAttack: 0
+  target: {fileID: 0}
   score: 0
   scoreBarUI: {fileID: 1229102522301351047}
   joystick: {fileID: 0}
   speed: 7
+  defaultMaterialPant: {fileID: 2100000, guid: 9631ce711a26cb548ab1b59cc30695d5, type: 2}
 --- !u!1 &9155278344256803124
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1017941463083884137, guid: c3e6502ea8cea5b468125f3c82caf746, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1017941463084171849, guid: c3e6502ea8cea5b468125f3c82caf746, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1336,6 +1324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 6779896937301283873, guid: 2ea48cd122d15354ea8d0774feac9331, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7515471553837721138, guid: 2ea48cd122d15354ea8d0774feac9331, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.015
@@ -1398,6 +1390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rau
       objectReference: {fileID: 0}
+    - target: {fileID: 152428157762299118, guid: 622d359f1f0c5f045be9975809a18876, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3766928223945266941, guid: 622d359f1f0c5f045be9975809a18876, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -1456,6 +1452,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 166327109708959745}
     m_Modifications:
+    - target: {fileID: 1590722214973147327, guid: c66d7a0772374704da8315276a209303, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5847020421983329874, guid: c66d7a0772374704da8315276a209303, type: 3}
       propertyPath: m_Name
       value: ScoreBarUI

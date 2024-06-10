@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1302561a1dd862348b4360513280c615, type: 3}
-  m_Name: Angel
+  m_Name: DeadPood
   m_EditorClassIdentifier: 
-  id: 2
-  setFullName: Angel
-  icon: {fileID: 21300000, guid: 9f8e6f5ea0f849447b464193072ab6f3, type: 3}
+  id: 3
+  setFullName: DeadPood
+  icon: {fileID: 21300000, guid: 7965f490c2ec6044d854d957fe85186e, type: 3}
   price: 2500
-  materialBody: {fileID: 2100000, guid: 0ff1b59d8caf285458a4b59a0089fa49, type: 2}
-  wing: {fileID: 0}
+  materialBody: {fileID: 2100000, guid: 31ad372e6f2c4b44d8fbe9fdfa1433e6, type: 2}
+  wing: {fileID: 1149077837875462508, guid: ed7aeeecee32d104d915e1d1d308a36a, type: 3}
   tail: {fileID: 0}
-  specialHair: {fileID: 100203773852179365, guid: b6264a989d6575047a506a2c16e88216, type: 3}
+  specialHair: {fileID: 0}

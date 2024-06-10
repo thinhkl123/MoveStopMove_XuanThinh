@@ -25,7 +25,7 @@ public class LostUI : UICanvas
 
     public void ChangeRankText(int value)
     {
-        rankText.text = "#" + value.ToString();
+        rankText.text = "#" + (value+1).ToString();
     }
 
     public void ChangeRewardText(int value)

@@ -69,7 +69,7 @@ public class DataManager : Singleton<DataManager>
                 hairIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 pantIds = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 shieldIds = new int[] { 0, 0 },
-                setFullIds = new int[] { 0, 0, 0, 0, 0 }
+                setFullIds = new int[] { 0, 0, 0, 0 }
             };
 
             SaveData(gameData);

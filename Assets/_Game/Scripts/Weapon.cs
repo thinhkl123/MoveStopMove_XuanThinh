@@ -132,6 +132,7 @@ public class Weapon : GameUnit
 
     public void DeSpawn()
     {
+        parent.gameObject.GetComponent<Character>().ResetAttack();
         SimplePool.Despawn(this);
     }
 

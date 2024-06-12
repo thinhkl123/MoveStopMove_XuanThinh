@@ -28,6 +28,8 @@ public class CameraFollower : MonoBehaviour
 
     void Follow()
     {
+        //Debug.Log(player.newScale);
+
         Vector3 currentPosition = transform.position;
 
         Vector3 newDistance = new Vector3(distance.x * player.newScale, distance.y * player.newScale, distance.z * player.newScale);

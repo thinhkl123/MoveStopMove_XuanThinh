@@ -102,6 +102,7 @@ public class Character : GameUnit
     public void Attack()
     {
         canAttack = false;
+        StopCoroutine(CoolDownAttackTime());
         StartCoroutine(CoolDownAttackTime());
 
         animator.SetTrigger("Attack");
@@ -205,6 +206,22 @@ public class Character : GameUnit
 
     public void UpdateScore(int value)
     {
+        if (value == 0)
+        {
+            scale = 1;
+            newScale = scale;
+            if (rangeBuf != 0)
+            {
+                newScale += scale * (rangeBuf / 100);
+            }
+            transform.localScale = new Vector3(newScale, newScale, newScale);
+            radius = initalRadius * newScale;
+
+            //Debug.Log(radius + " " + rangeBuf);
+
+            return;
+        }
+
         for (int i = 0; i < value; i++)
         {
             ChangeScore(1);

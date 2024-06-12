@@ -60,7 +60,7 @@ public class Player : Character
         GameManager.Ins.OnWin += GameManager_OnWin;
 
         ChangeCurrentSkin();
-        //OnInit();
+        OnInit();
     }
 
     private void GameManager_OnWin(object sender, System.EventArgs e)
@@ -82,6 +82,7 @@ public class Player : Character
         base.OnInit();
         visual.rotation = Quaternion.identity;
         transform.position = Vector3.zero;
+        UpdateScore(0);
     }
 
     private void Update()
@@ -111,7 +112,7 @@ public class Player : Character
         {
             visual.forward = movement;
             animator.SetFloat("Speed", movement.magnitude);
-            ResetAttack();
+            //ResetAttack();
         }
         else
         {

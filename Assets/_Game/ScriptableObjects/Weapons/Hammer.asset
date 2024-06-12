@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   weaponName: HAMMER
   speedBuf: 0
-  rangeBuf: 1
+  rangeBuf: 0
   price: 0
   weapon: {fileID: 7866585750681027362, guid: 5dd5d3ed77356f9428c41d13d4be0ccf, type: 3}
   weaponOnHand: {fileID: 5809427112986239676, guid: 6d691a131360387429a9754134d4c101, type: 3}

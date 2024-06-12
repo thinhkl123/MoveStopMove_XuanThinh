@@ -19,4 +19,4 @@ MonoBehaviour:
   materialBody: {fileID: 2100000, guid: 0c79b5b9fc25b1e469509a9e1db9ecb8, type: 2}
   wing: {fileID: 3869854544532059278, guid: 250b9173cf90ab44fb7e145e401abaac, type: 3}
   tail: {fileID: 2486367336741987961, guid: c877146db391b774dbc275711e11aaf6, type: 3}
-  specialHair: {fileID: 5167484242134000645, guid: becbd465bd5f784408ad6af3a5f2aaa7, type: 3}
+  specialHair: {fileID: 7226381836985093963, guid: 64842276141bb1a499f9f7fb2f2e2b5a, type: 3}

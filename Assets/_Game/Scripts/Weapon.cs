@@ -19,6 +19,7 @@ public class Weapon : GameUnit
     private Transform parent;
     private bool isLaunch;
     private Vector3 target;
+    private Vector3 dir;
     private float range;
 
     private float speed;
@@ -74,7 +75,14 @@ public class Weapon : GameUnit
 
         if (isLaunch)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+            /*
+            if (parent.transform == Player.Instance.transform)
+            {
+                Debug.Log(transform.position + " " + dir.normalized);
+            }
+            */
         }
     }
 
@@ -118,6 +126,14 @@ public class Weapon : GameUnit
     {
         newTarget = new Vector3(newTarget.x, transform.position.y, newTarget.z);
         target = newTarget;
+        dir = (target - this.transform.position);
+        /*
+        if (parent.transform == Player.Instance.transform)
+        {
+            Debug.Log(dir.normalized + " " +  target);
+        }
+        */
+        //Debug.Log(dir.normalized);
     }
 
     public void SetParent(Transform parent)
